@@ -1,5 +1,9 @@
 Installation von Abhängigkeiten
-``` npm install
+```bash
+npm install
+```
 
 Starte den Server mit:
-``` npx vite
+```bash
+npx vite
+```
