@@ -19,3 +19,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Karte zentrieren und in den Grenzen halten
 map.fitBounds(bounds);
+
+// Lade die festivals2025.json und füge Marker hinzu
+fetch('festivals2025.json')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(festival => {
+            const { name, location, date, bands } = festival;
+
+            // Erstelle einen Marker für jedes Festival
+            const marker = L.marker([location.latitude, location.longitude])
+                .addTo(map)
+                .bindPopup(`
+                    <b>${name}</b><br>
+                    Location: ${location.name}<br>
+                    Date: ${date}<br>
+                    Bands: ${bands.join(', ')}
+                `);
+        });
+    })
+    .catch(error => console.error('Error loading the JSON file:', error));
