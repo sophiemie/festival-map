@@ -7,6 +7,7 @@
             "longitude": 9.4788
         },
         "date": "2025-06-20 to 2025-06-22",
+        "logo": "images/hurricane.png",
         "bands": [
             "01099",
             "070 Shake",
@@ -78,6 +79,7 @@
             "longitude": 8.9285
         },
         "date": "2025-06-20 to 2025-06-22",
+        "logo": "images/southside.png",
         "bands": [
             "01099",
             "070 Shake",
@@ -149,6 +151,7 @@
             "longitude": 6.9472
         },
         "date": "2025-06-06 to 2025-06-08",
+        "logo": "images/rock-am-ring.png",
         "bands": [
             "A Day to Remember",
             "Adam Angst",
@@ -230,6 +233,7 @@
             "longitude": 11.1217
         },
         "date": "2025-06-06 to 2025-06-08",
+        "logo": "images/rock-im-park.png",
         "bands": [
             "A Day to Remember",
             "Adam Angst",
@@ -311,6 +315,7 @@
             "longitude": 9.3756
         },
         "date": "2025-07-31 to 2025-08-02",
+        "logo": "images/wacken.png",
         "bands": [
             "1349",
             "Angel Witch",
@@ -363,6 +368,7 @@
             "longitude": 8.6017
         },
         "date": "2025-07-17 to 2025-07-20",
+        "logo": "images/deichbrand.png",
         "bands": [
             "Macklemore",
             "K.I.Z", 
@@ -401,6 +407,7 @@
             "longitude": 11.5937
         },
         "date": "2025-07-10 to 2025-07-14",
+        "logo": "images/airbeat.png",
         "bands": [
             "Alfred Heinrichs",
             "Amelie Lens",
@@ -448,6 +455,7 @@
     {
         "name": "Highfield Festival",
         "date": "2025-08-15 to 2025-08-17",
+        "logo": "images/highfield.png",
         "location": {
           "name": "Leipzig",
           "latitude": 51.303, 
@@ -479,6 +487,7 @@
       {
         "name": "Parookaville",
         "date": "2025-07-18 to 2025-07-20",
+        "logo": "images/hurricane.png",
         "location": {
           "name": "Weeze",
           "latitude": 51.602, 
@@ -491,6 +500,7 @@
       {
         "name": "SonneMondSterne",
         "date": "2025-08-07 to 2025-08-09",
+        "logo": "images/sonnemondsterne.png",
         "location": {
           "name": "Saalburg-Ebersdorf",
           "latitude": 50.545, 
@@ -526,6 +536,7 @@
       {
         "name": "Summer Breeze",
         "date": "2025-08-20 to 2025-08-23",
+        "logo": "images/summer-breeze.png",
         "location": {
           "name": "Dinkelsbühl",
           "latitude": 49.065, 
