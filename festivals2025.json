@@ -487,7 +487,7 @@
       {
         "name": "Parookaville",
         "date": "2025-07-18 to 2025-07-20",
-        "logo": "images/hurricane.png",
+        "logo": "images/parookaville.png",
         "location": {
           "name": "Weeze",
           "latitude": 51.602, 
@@ -556,6 +556,18 @@
           "Non est Deus", "Elvenking", "League Of Distortion", "Schattenmann", "Slope", 
           "Allt", "Master", "Iotunn", "Imperial Triumphant", "Abbie Falls", "Nytt Land", 
           "Hammer King", "Destinity", "Hiraes", "Avralize", "Stesy", "Arctis"
+        ]
+      },
+      {
+        "name": "Lollapalooza",
+        "date": "2025-07-12 to 2025-07-13",
+        "logo": "images/lollapalooza.png",
+        "location": {
+          "name": "Berlin",
+          "latitude": 52.518, 
+          "longitude": 13.238
+        },
+        "bands": [
         ]
       }
 ]

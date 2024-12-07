@@ -20,15 +20,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Karte zentrieren und in den Grenzen halten
 map.fitBounds(bounds);
 
-// Lade die festivals2025.json und füge Marker hinzu
+// Lade die festivals2025.json und füge Marker mit Logos hinzu
 fetch('festivals2025.json')
     .then(response => response.json())
     .then(data => {
         data.forEach(festival => {
-            const { name, location, date, bands } = festival;
+            const { name, location, date, bands, logo } = festival;
 
-            // Erstelle einen Marker für jedes Festival
-            const marker = L.marker([location.latitude, location.longitude])
+            // Erstelle ein benutzerdefiniertes Icon mit dem Logo
+            const customIcon = L.icon({
+                iconUrl: logo, // Der Pfad zum Logo aus der JSON
+                iconSize: [50, 50], // Größe des Icons (anpassbar)
+                iconAnchor: [25, 50], // Position des Icons relativ zum Markerpunkt
+                popupAnchor: [0, -50] // Position des Popups relativ zum Icon
+            });
+
+            // Füge den Marker mit dem benutzerdefinierten Icon hinzu
+            L.marker([location.latitude, location.longitude], { icon: customIcon })
                 .addTo(map)
                 .bindPopup(`
                     <b>${name}</b><br>
