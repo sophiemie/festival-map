@@ -46,6 +46,9 @@ fetch('festivals2025.json')
                 document.getElementById('festival-location').textContent = `Location: ${location.name}`;
                 document.getElementById('festival-date').textContent = `Date: ${date}`;
                 
+                // Setze das Festival-Logo in die Sidebar
+                document.getElementById('festival-logo').src = logo;
+                
                 // Liste der Bands anzeigen
                 const bandsList = document.getElementById('festival-bands');
                 bandsList.innerHTML = ''; // Vorherige Bands löschen

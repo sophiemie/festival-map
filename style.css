@@ -51,6 +51,15 @@ body {
     overflow-y: auto;
 }
 
+#festival-sidebar img {
+    max-width: 100px; /* Maximalbreite des Logos */
+    margin-bottom: 10px; /* Abstand unter dem Logo */
+    display: block; /* Stellt sicher, dass das Bild als Block-Element angezeigt wird */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 #festival-sidebar h3 {
     font-size: 24px;
     margin-bottom: 10px;
