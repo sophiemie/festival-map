@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+#map {
+    border: 2px solid #333;
+    border-radius: 10px;
+    height: 100vh; /* Vollbildhöhe */
+    width: 100%;
+}
+
+.leaflet-marker-icon {
+    background-color: rgba(0, 0, 0, 0.4); /* Halbtransparenter schwarzer Hintergrund */
+    padding: 5px; /* Abstand zwischen dem Logo und dem Rand */
+    border: 2px solid #3399ff;
+    border-radius: 50%; /* Runde Form für die Icons */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Schatten für Tiefe */
+    object-fit: contain;
+}
+
+.leaflet-popup-content {
+    font-family: Arial, sans-serif; /* Schriftart für Popup */
+    font-size: 14px; /* Schriftgröße */
+    color: #333; /* Textfarbe */
+}
+
+.leaflet-popup {
+    border: 2px solid #ff6600;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.leaflet-marker-icon:hover {
+    transform: scale(1.2); /* Vergrößert das Logo */
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.5); /* Fügt einen blauen Schatten hinzu */
+}

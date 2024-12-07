@@ -30,7 +30,7 @@ fetch('festivals2025.json')
             // Erstelle ein benutzerdefiniertes Icon mit dem Logo
             const customIcon = L.icon({
                 iconUrl: logo, // Der Pfad zum Logo aus der JSON
-                iconSize: [50, 50], // Größe des Icons (anpassbar)
+                iconSize: [70, 70], // Größe des Icons (anpassbar)
                 iconAnchor: [25, 50], // Position des Icons relativ zum Markerpunkt
                 popupAnchor: [0, -50] // Position des Popups relativ zum Icon
             });
