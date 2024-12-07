@@ -35,3 +35,32 @@ body {
     transform: scale(1.2); /* Vergrößert das Logo */
     box-shadow: 0 0 15px rgba(0, 0, 255, 0.5); /* Fügt einen blauen Schatten hinzu */
 }
+
+#festival-sidebar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#festival-sidebar h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#festival-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#festival-sidebar ul li {
+    margin-bottom: 5px;
+}

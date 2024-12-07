@@ -31,19 +31,33 @@ fetch('festivals2025.json')
             const customIcon = L.icon({
                 iconUrl: logo, // Der Pfad zum Logo aus der JSON
                 iconSize: [70, 70], // Größe des Icons (anpassbar)
-                iconAnchor: [25, 50], // Position des Icons relativ zum Markerpunkt
+                iconAnchor: [35, 70], // Position des Icons relativ zum Markerpunkt
                 popupAnchor: [0, -50] // Position des Popups relativ zum Icon
             });
 
             // Füge den Marker mit dem benutzerdefinierten Icon hinzu
-            L.marker([location.latitude, location.longitude], { icon: customIcon })
-                .addTo(map)
-                .bindPopup(`
-                    <b>${name}</b><br>
-                    Location: ${location.name}<br>
-                    Date: ${date}<br>
-                    Bands: ${bands.join(', ')}
-                `);
+            const marker = L.marker([location.latitude, location.longitude], { icon: customIcon })
+                .addTo(map);
+
+            // Beim Klicken auf den Marker wird die Sidebar geöffnet
+            marker.on('click', () => {
+                // Fülle die Sidebar mit den Festivalinformationen
+                document.getElementById('festival-name').textContent = name;
+                document.getElementById('festival-location').textContent = `Location: ${location.name}`;
+                document.getElementById('festival-date').textContent = `Date: ${date}`;
+                
+                // Liste der Bands anzeigen
+                const bandsList = document.getElementById('festival-bands');
+                bandsList.innerHTML = ''; // Vorherige Bands löschen
+                bands.forEach(band => {
+                    const li = document.createElement('li');
+                    li.textContent = band;
+                    bandsList.appendChild(li);
+                });
+
+                // Sidebar anzeigen
+                document.getElementById('festival-sidebar').style.display = 'block';
+            });
         });
     })
     .catch(error => console.error('Error loading the JSON file:', error));
