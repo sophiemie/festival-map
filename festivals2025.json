@@ -449,8 +449,9 @@
         "name": "Highfield Festival",
         "date": "2025-08-15 to 2025-08-17",
         "location": {
-          "city": "Leipzig",
-          "coordinates": { "lat": 51.303, "lng": 12.436 }
+          "name": "Leipzig",
+          "latitude": 51.303, 
+          "longitude": 12.436 
         },
         "bands": [
             "Alli Neumann", 
@@ -479,8 +480,9 @@
         "name": "Parookaville",
         "date": "2025-07-18 to 2025-07-20",
         "location": {
-          "city": "Weeze",
-          "coordinates": { "lat": 51.602, "lng": 6.193 }
+          "name": "Weeze",
+          "latitude": 51.602, 
+          "longitude": 6.193
         },
         "bands": [
             ""
@@ -490,8 +492,9 @@
         "name": "SonneMondSterne",
         "date": "2025-08-07 to 2025-08-09",
         "location": {
-          "city": "Saalburg-Ebersdorf",
-          "coordinates": { "lat": 50.545, "lng": 11.960 }
+          "name": "Saalburg-Ebersdorf",
+          "latitude": 50.545, 
+          "longitude": 11.960
         },
         "bands": [
           "Alfred Heinrichs", 
@@ -524,8 +527,9 @@
         "name": "Summer Breeze",
         "date": "2025-08-20 to 2025-08-23",
         "location": {
-          "city": "Dinkelsbühl",
-          "coordinates": { "lat": 49.065, "lng": 10.333 }
+          "name": "Dinkelsbühl",
+          "latitude": 49.065, 
+          "longitude": 10.333
         },
         "bands": [
           "Machine Head", "Gojira", "Blind Guardian", "In Extremo", "Within Temptation", 
