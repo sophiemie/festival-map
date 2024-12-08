@@ -569,5 +569,47 @@
         },
         "bands": [
         ]
+      },
+      {
+        "name": "San Hejmo Festival",
+        "date": "2025-08-15 to 2025-08-16",
+        "logo": "images/san-hejmo.png",
+        "location": {
+          "name": "Weeze",
+          "latitude": 51.606, 
+          "longitude": 6.121
+        },
+        "bands": [
+            "Clueso",
+            "FiNCH",
+            "K.I.Z",
+            "Nina Chuba",
+            "Sido",
+            "01099",
+            "Bausa",
+            "Paula Hartmann",
+            "Alli Neumann",
+            "Esther Graf",
+            "Madeline Juno",
+            "Ritter Lean"
+        ]
+      },
+      {
+        "name": "Open R Festival",
+        "date": "2025-06-28 to 2025-06-29",
+        "logo": "images/open-r.png",
+        "location": {
+          "name": "Uelzen",
+          "latitude": 52.968, 
+          "longitude": 10.547
+        },
+        "bands": [
+            "Deichkind",
+            "FiNCH",
+            "Bausa",
+            "257ers",
+            "Twocolors",
+            "Anais"
+        ]
       }
 ]
