@@ -52,12 +52,18 @@ body {
 }
 
 #festival-sidebar img {
-    max-width: 100px; /* Maximalbreite des Logos */
-    margin-bottom: 10px; /* Abstand unter dem Logo */
-    display: block; /* Stellt sicher, dass das Bild als Block-Element angezeigt wird */
+    width: auto; /* Beibehaltung des Seitenverhältnisses */
+    max-width: 100%; /* Maximale Breite */
+    height: auto; /* Keine Verzerrung */
+    margin-bottom: 20px; /* Abstand unter dem Bild */
+    display: block;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgba(0, 123, 255, 0.3); /* Leicht blauer Hintergrund */
+    padding: 10px; /* Abstand zwischen Bild und Hintergrund */
+    border-radius: 10px; /* Abgerundete Ecken */
 }
+
 
 
 #festival-sidebar h3 {
