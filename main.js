@@ -1,3 +1,4 @@
+
 // Erstelle eine Karte und setze den View auf Deutschland
 const map = L.map('map', {
     center: [51.1657, 10.4515],
@@ -26,6 +27,9 @@ fetch('festivals2025.json')
     .then(data => {
         data.forEach(festival => {
             const { name, location, date, bands, logo } = festival;
+
+            // Extrahiere Start- und Enddatum aus dem `date`-Feld
+            const [startDate, endDate] = date.split(" to ").map(d => d.trim());
 
             // Erstelle ein benutzerdefiniertes Icon mit dem Logo
             const customIcon = L.icon({
@@ -56,6 +60,21 @@ fetch('festivals2025.json')
                     const li = document.createElement('li');
                     li.textContent = band;
                     bandsList.appendChild(li);
+                });
+
+                // Kalender hinzufügen
+                // Kalender-Container zurücksetzen
+                const calendarContainer = document.getElementById('festival-calendar');
+                calendarContainer.innerHTML = ""; // Vorherigen Kalender entfernen
+
+                // Flatpickr direkt in den Container einfügen
+                flatpickr(calendarContainer, {
+                    defaultDate: date, // Standard-Datum auf Festivaldatum setzen
+                    inline: true, // Kalender wird direkt angezeigt
+                    dateFormat: "Y-m-d",
+                    onChange: (selectedDates, dateStr) => {
+                        console.log(`Neues Datum für ${name}: ${dateStr}`);
+                    }
                 });
 
                 // Sidebar anzeigen

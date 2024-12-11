@@ -79,3 +79,14 @@ body {
 #festival-sidebar ul li {
     margin-bottom: 5px;
 }
+
+.highlight-range {
+    background-color: #3399ff !important; /* Blau für hervorgehobene Tage */
+    color: white !important;
+    border-radius: 5px;
+}
+
+#festival-calendar {
+    width: 100%;
+    margin-top: 20px;
+}
