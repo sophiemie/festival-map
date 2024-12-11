@@ -68,9 +68,33 @@ fetch('festivals2025.json')
                     defaultDate: [startDate, endDate],  // Setze den Bereich auf die Festival-Daten
                     locale: {
                         rangeSeparator: " to "  // Trennzeichen für Start- und Enddatum
+                    },
+                    clickOpens: false,  // Verhindert das Öffnen des Kalenders beim Klicken
+                    onReady: function() {
+                        const calendarDays = document.querySelectorAll('.flatpickr-day');
+                        calendarDays.forEach(day => {
+                            day.style.pointerEvents = 'none';  // Macht die Tage nicht klickbar
+                        });
+                    },
+                
+                    onValueUpdate: function(selectedDates) {
+                        // Entferne alle vorherigen Markierungen
+                        const calendarDays = document.querySelectorAll('.flatpickr-day');
+                        calendarDays.forEach(day => {
+                            day.classList.remove('selected-day');
+                        });
+                
+                        // Markiere alle ausgewählten Tage
+                        selectedDates.forEach(selectedDay => {
+                            const selectedDayStr = selectedDay.toISOString().split('T')[0]; // Formatiertes Datum
+                            const dayElement = document.querySelector(`[data-date="${selectedDayStr}"]`);
+                            if (dayElement) {
+                                dayElement.classList.add('selected-day');  // CSS-Klasse hinzufügen
+                            }
+                        });
                     }
                 });
-
+                
                 document.getElementById('festival-sidebar').style.display = 'block';
             });
         });
