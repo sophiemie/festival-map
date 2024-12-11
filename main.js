@@ -48,7 +48,7 @@ fetch('festivals2025.json')
             marker.on('click', () => {
                 document.getElementById('festival-name').textContent = name;
                 document.getElementById('festival-location').textContent = `Location: ${location.name}`;
-                document.getElementById('festival-date').textContent = `Date: ${date}`;
+                //document.getElementById('festival-date').textContent = `Date: ${date}`;
                 document.getElementById('festival-logo').src = logo;
 
                 const bandsList = document.getElementById('festival-bands');
@@ -92,7 +92,14 @@ fetch('festivals2025.json')
                                 dayElement.classList.add('selected-day');  // CSS-Klasse hinzufügen
                             }
                         });
-                    }
+                    },
+                    // Verhindert das Wechseln des Monats und Jahres
+                    showMonths: 1,
+                    disableMobile: true,
+                    prevArrow: "←",  // Versteckt die vorherige Monatsschaltfläche
+                    nextArrow: "→",  // Versteckt die nächste Monatsschaltfläche
+                    minDate: startDate, // Begrenze das Minimum-Datum
+                    maxDate: endDate   // Begrenze das Maximum-Datum
                 });
                 
                 document.getElementById('festival-sidebar').style.display = 'block';
