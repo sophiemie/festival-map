@@ -29,55 +29,48 @@ fetch('festivals2025.json')
             const { name, location, date, bands, logo } = festival;
 
             // Extrahiere Start- und Enddatum aus dem `date`-Feld
-            const [startDate, endDate] = date.split(" to ").map(d => d.trim());
-
-            // Erstelle ein benutzerdefiniertes Icon mit dem Logo
+            const [startDate, endDate] = date.split(" to ").map(d => {
+                const dateParts = d.split("-");
+                // Entferne Zeitprobleme, indem wir das Datum mit expliziter Stunde und Minute erstellen
+                const fixedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], 12, 0, 0); // Mit mittagszeit
+                return fixedDate.toISOString().split("T")[0]; // ISO-Datum zurückgeben
+            });
             const customIcon = L.icon({
-                iconUrl: logo, // Der Pfad zum Logo aus der JSON
-                iconSize: [70, 70], // Größe des Icons (anpassbar)
-                iconAnchor: [35, 70], // Position des Icons relativ zum Markerpunkt
-                popupAnchor: [0, -50] // Position des Popups relativ zum Icon
+                iconUrl: logo,
+                iconSize: [70, 70],
+                iconAnchor: [35, 70],
+                popupAnchor: [0, -50]
             });
 
-            // Füge den Marker mit dem benutzerdefinierten Icon hinzu
             const marker = L.marker([location.latitude, location.longitude], { icon: customIcon })
                 .addTo(map);
 
-            // Beim Klicken auf den Marker wird die Sidebar geöffnet
             marker.on('click', () => {
-                // Fülle die Sidebar mit den Festivalinformationen
                 document.getElementById('festival-name').textContent = name;
                 document.getElementById('festival-location').textContent = `Location: ${location.name}`;
                 document.getElementById('festival-date').textContent = `Date: ${date}`;
-                
-                // Setze das Festival-Logo in die Sidebar
                 document.getElementById('festival-logo').src = logo;
-                
-                // Liste der Bands anzeigen
+
                 const bandsList = document.getElementById('festival-bands');
-                bandsList.innerHTML = ''; // Vorherige Bands löschen
+                bandsList.innerHTML = '';
                 bands.forEach(band => {
                     const li = document.createElement('li');
                     li.textContent = band;
                     bandsList.appendChild(li);
                 });
 
-                // Kalender hinzufügen
-                // Kalender-Container zurücksetzen
                 const calendarContainer = document.getElementById('festival-calendar');
-                calendarContainer.innerHTML = ""; // Vorherigen Kalender entfernen
+                calendarContainer.innerHTML = '';
 
-                // Flatpickr direkt in den Container einfügen
                 flatpickr(calendarContainer, {
-                    defaultDate: date, // Standard-Datum auf Festivaldatum setzen
-                    inline: true, // Kalender wird direkt angezeigt
-                    dateFormat: "Y-m-d",
-                    onChange: (selectedDates, dateStr) => {
-                        console.log(`Neues Datum für ${name}: ${dateStr}`);
+                    inline: true,
+                    mode: "range",  // Bereichsmodus für Start- und Enddatum
+                    defaultDate: [startDate, endDate],  // Setze den Bereich auf die Festival-Daten
+                    locale: {
+                        rangeSeparator: " to "  // Trennzeichen für Start- und Enddatum
                     }
                 });
 
-                // Sidebar anzeigen
                 document.getElementById('festival-sidebar').style.display = 'block';
             });
         });
