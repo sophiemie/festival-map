@@ -41,7 +41,7 @@ body {
     top: 20px;
     right: 20px;
     width: 300px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.0);
     border: 2px solid #ccc;
     border-radius: 10px;
     padding: 20px;
@@ -49,6 +49,7 @@ body {
     z-index: 1000;
     max-height: 90vh;
     overflow-y: auto;
+    backdrop-filter: blur(20px);
 }
 
 #festival-sidebar img {
@@ -59,7 +60,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(0, 123, 255, 0.3); /* Leicht blauer Hintergrund */
+    /*background-color: rgba(0, 123, 255, 0.3); /* Leicht blauer Hintergrund */
     padding: 10px; /* Abstand zwischen Bild und Hintergrund */
     border-radius: 10px; /* Abgerundete Ecken */
 }
@@ -141,3 +142,8 @@ body {
     border-radius: 0 !important; /* Keine Abrundung in der Mitte */
 }
 
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+  cursor: not-allowed;
+  color: rgba(57,57,57,1.0);
+}
