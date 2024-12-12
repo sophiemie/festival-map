@@ -102,6 +102,11 @@ fetch('festivals2025.json')
                     maxDate: endDate   // Begrenze das Maximum-Datum
                 });
                 
+                
+                
+                
+                
+                
                 document.getElementById('festival-sidebar').style.display = 'block';
             });
         });
