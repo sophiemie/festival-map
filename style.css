@@ -98,7 +98,7 @@ body {
     padding: 0 !important; /* Sicherstellen, dass kein zusätzliches Padding existiert */
     background: #3399ff !important; /* Einheitliche Hintergrundfarbe */
     color: white !important; /* Einheitliche Schriftfarbe */
-    box-shadow: none !important; /* Entfernt jeglichen Schatten */
+    box-shadow: -5px 0 0 #3399ff, 5px 0 0 #3399ff; /* Zwischenräume der Tage*/
     display: flex; /* Erlaubt Flexbox-Alignment */
     justify-content: center;
     align-items: center;
