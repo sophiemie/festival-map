@@ -90,3 +90,54 @@ body {
     width: 100%;
     margin-top: 20px;
 }
+
+/* Ueberschreibungen von flatpickr.css */
+.flatpickr-day.inRange {
+    border-radius: 0 !important; /* Keine Abrundungen in der Mitte */
+    margin: 0 !important; /* Entfernt unerwünschte Abstände */
+    padding: 0 !important; /* Sicherstellen, dass kein zusätzliches Padding existiert */
+    background: #3399ff !important; /* Einheitliche Hintergrundfarbe */
+    color: white !important; /* Einheitliche Schriftfarbe */
+    box-shadow: none !important; /* Entfernt jeglichen Schatten */
+    display: flex; /* Erlaubt Flexbox-Alignment */
+    justify-content: center;
+    align-items: center;
+}
+
+.flatpickr-day.startRange {
+    border-radius: 50% 0 0 50% !important; /* Abrundung links */
+    margin: 0 !important;
+    background: #3399ff !important;
+    color: white !important;
+}
+
+.flatpickr-day.endRange {
+    border-radius: 0 50% 50% 0 !important; /* Abrundung rechts */
+    margin: 0 !important;
+    background: #3399ff !important;
+    color: white !important;
+}
+
+.flatpickr-day {
+    box-sizing: border-box; /* Stelle sicher, dass Padding und Border innerhalb der Breite gezählt werden */
+    margin: 0; /* Keine Abstände */
+    padding: 0;
+    border: none; /* Keine Ränder */
+    text-align: center;
+}
+
+.flatpickr-day:not(.inRange):not(.startRange):not(.endRange) {
+    background: none !important; /* Hintergrund für nicht ausgewählte Tage */
+}
+
+.flatpickr-day.endRange {
+    border-radius: 0 50% 50% 0 !important; /* Abrundung nur rechts */
+    margin: 0 !important; /* Entferne Abstand */
+    background: #3399ff !important; /* Gleiche Farbe */
+    color: white !important;
+}
+
+.flatpickr-day:not(.startRange):not(.endRange).inRange {
+    border-radius: 0 !important; /* Keine Abrundung in der Mitte */
+}
+
