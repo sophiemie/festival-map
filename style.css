@@ -124,6 +124,41 @@ body {
 
 
 
+/* Styling für die Bandliste */
+#festival-bands {
+    list-style: none; /* Entfernt die Standard-Punkte der Liste */
+    padding: 0;
+    margin: 20px 0; /* Abstand zur Kalenderkomponente */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Abstand zwischen den Einträgen */
+    align-items: center; /* Zentriert die Liste horizontal */
+}
+
+#festival-bands li {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background-color: #f9f9f9; /* Heller Hintergrund */
+    padding: 8px 15px;
+    border-radius: 10px; /* Abgerundete Ecken */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+    transition: all 0.3s ease; /* Weicher Übergang */
+    width: 80%; /* Festgelegte Breite */
+    text-align: center; /* Zentriert den Text */
+}
+
+#festival-bands li:hover {
+    background-color: #007BFF; /* Hover-Hintergrundfarbe */
+    color: #fff; /* Textfarbe bei Hover */
+    transform: scale(1.05); /* Leichte Vergrößerung */
+    cursor: pointer; /* Zeigeränderung bei Hover */
+}
+
+
+
+
 
 #festival-sidebar ul {
     list-style: none;
