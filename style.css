@@ -79,38 +79,49 @@ body {
 
 /* Container für Location und Tickets */
 .info-container {
-    display: flex;
-    justify-content: center; /* Zentriert die Inhalte horizontal */
-    gap: 20px; /* Abstand zwischen Location und Tickets */
-    margin-top: 5px;
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Vertikal zentrieren */
+    justify-content: center; /* Horizontal zentrieren */
+    gap: 20px; /* Abstand zwischen Location und Button */
+    margin-top: 10px; /* Abstand zum Titel */
 }
 
 #festival-location {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: #555;
     margin: 0; /* Entfernt Standardabstand */
-    line-height: 1.5;
+    line-height: 1.0;
     display: flex;
     align-items: center; /* Vertikale Zentrierung */
 }
 
 
-/* Tickets-Link Styling */
 #festival-tickets {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #007BFF;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Primäre Farbe */
+    color: #fff;
     text-decoration: none;
-    border: 2px solid #007BFF;
-    border-radius: 5px;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Schatten */
+    transition: all 0.3s ease; /* Weicher Übergang */
+    text-align: center;
+    white-space: nowrap; /* Verhindert den Zeilenumbruch */
+    flex-shrink: 0; /* Verhindert, dass der Button schrumpft */
 }
+
+#festival-tickets:hover {
+    background-color: #0056b3; /* Dunkleres Blau bei Hover */
+    color: #fff; /* Textfarbe bleibt weiß */
+    transform: translateY(-2px); /* Leichtes Anheben */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Verstärkter Schatten */
+    text-decoration: underline; /* Leichte Betonung durch Unterstreichen */
+}
+
 
 
 
