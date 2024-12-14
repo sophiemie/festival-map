@@ -47,9 +47,13 @@ fetch('festivals2025.json')
 
             marker.on('click', () => {
                 document.getElementById('festival-name').textContent = name;
-                document.getElementById('festival-location').textContent = `Location: ${location.name}`;
+                document.getElementById('festival-location').textContent = `${location.name}`;
                 //document.getElementById('festival-date').textContent = `Date: ${date}`;
                 document.getElementById('festival-logo').src = logo;
+
+                const ticketButton = document.getElementById("festival-tickets");
+                ticketButton.href = festival["ticket-url"];
+
 
                 const bandsList = document.getElementById('festival-bands');
                 bandsList.innerHTML = '';

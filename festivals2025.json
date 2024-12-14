@@ -8,6 +8,7 @@
         },
         "date": "2025-06-20 to 2025-06-22",
         "logo": "images/hurricane.png",
+        "ticket-url": "https://www.ticket-onlineshop.com/ols/hurricane/?cmpimport=I18xXyNfYzI0MTAyX3M5NF9jMjQxMDNfczIzX2M1MjA5MF9zMTQwOV9zOTA1X2M1MjA4OV9jMjIxNDNfYzUxNzUwXyMxLS0tIw",
         "bands": [
             "01099",
             "070 Shake",
@@ -80,6 +81,7 @@
         },
         "date": "2025-06-20 to 2025-06-22",
         "logo": "images/southside.png",
+        "ticket-url": "https://www.ticket-onlineshop.com/ols/southside/?cmpimport=I18xXyNfYzI0MTAyX3M5NF9jMjQxMDNfczIzX2M1MjA5MF9zMTQwOV9zOTA1X2MyMjE0M19jNTE3NTBfIzEtLS0j",
         "bands": [
             "01099",
             "070 Shake",
@@ -152,7 +154,8 @@
         },
         "date": "2025-06-06 to 2025-06-08",
         "logo": "images/rock-am-ring.png",
-"bands": [
+        "ticket-url": "https://www.rock-am-ring.com/en/tickets",
+        "bands": [
             "A Day to Remember",
             "Adam Angst",
             "Airbourne",
@@ -253,6 +256,7 @@
         },
         "date": "2025-06-06 to 2025-06-08",
         "logo": "images/rock-im-park.png",
+        "ticket-url": "https://www.rock-im-park.com/en/tickets",
         "bands": [
             "A Day to Remember",
             "Adam Angst",
@@ -354,6 +358,7 @@
         },
         "date": "2025-07-31 to 2025-08-02",
         "logo": "images/wacken.png",
+        "ticket-url": "https://www.wacken.com/de/tickets-shop/woa-2025-tickets/",
         "bands": [
             "1349",
             "Angel Witch",
@@ -401,12 +406,13 @@
     {
         "name": "Deichbrand Festival",
         "location": {
-            "name": "Seeflughafen Cuxhaven/Nordholz",
+            "name": "Cuxhaven/Nordholz",
             "latitude": 53.7673,
             "longitude": 8.6017
         },
         "date": "2025-07-17 to 2025-07-20",
         "logo": "images/deichbrand.png",
+        "ticket-url": "https://www.ticket-onlineshop.com/ols/deichbrand/de/festivaltickets/channel/shop/index/",
         "bands": [
             "Macklemore",
             "K.I.Z", 
@@ -446,6 +452,7 @@
         },
         "date": "2025-07-10 to 2025-07-14",
         "logo": "images/airbeat.png",
+        "ticket-url": "https://airbeat-one.myticket.de/content",
         "bands": [
             "Alfred Heinrichs",
             "Amelie Lens",
@@ -494,6 +501,7 @@
         "name": "Highfield Festival",
         "date": "2025-08-15 to 2025-08-17",
         "logo": "images/highfield.png",
+        "ticket-url": "https://www.ticket-onlineshop.com/ols/highfield/de",
         "location": {
           "name": "Leipzig",
           "latitude": 51.303, 
@@ -526,6 +534,7 @@
         "name": "Parookaville",
         "date": "2025-07-18 to 2025-07-20",
         "logo": "images/parookaville.png",
+        "ticket-url": "https://www.parookaville.com/de/tickets",
         "location": {
           "name": "Weeze",
           "latitude": 51.602, 
@@ -539,6 +548,7 @@
         "name": "SonneMondSterne",
         "date": "2025-08-07 to 2025-08-09",
         "logo": "images/sonnemondsterne.png",
+        "ticket-url": "https://www.sonnemondsterne-shop.de/",
         "location": {
           "name": "Saalburg-Ebersdorf",
           "latitude": 50.545, 
@@ -575,6 +585,7 @@
         "name": "Summer Breeze",
         "date": "2025-08-13 to 2025-08-16",
         "logo": "images/summer-breeze.png",
+        "ticket-url": "https://www.sbtix.de/kategorien/tickets",
         "location": {
           "name": "Dinkelsbühl",
           "latitude": 49.065, 
@@ -600,6 +611,7 @@
         "name": "Lollapalooza",
         "date": "2025-07-12 to 2025-07-13",
         "logo": "images/lollapalooza.png",
+        "ticket-url": "https://www.lollapaloozade.com/tickets",
         "location": {
           "name": "Berlin",
           "latitude": 52.518, 
@@ -612,6 +624,7 @@
         "name": "San Hejmo Festival",
         "date": "2025-08-15 to 2025-08-16",
         "logo": "images/san-hejmo.png",
+        "ticket-url": "https://shop.ticketpay.de/BYUPH26R?ZW93ZWJtYXN0ZXJfMTcwNjg=elu40599xmm4ofl5gf.173424165624:1734196113229",
         "location": {
           "name": "Weeze",
           "latitude": 51.606, 
@@ -636,6 +649,7 @@
         "name": "Open R Festival",
         "date": "2025-06-28 to 2025-06-29",
         "logo": "images/open-r.png",
+        "ticket-url": "https://openrfestival.de/tickets/",
         "location": {
           "name": "Uelzen",
           "latitude": 52.968, 
@@ -647,7 +661,16 @@
             "Bausa",
             "257ers",
             "Twocolors",
-            "Anais"
+            "Anais",
+            "Keleo",
+            "Donots",
+            "Hämatom",
+            "Wolfmother",
+            "Fiddler’s Green",
+            "Sukkar",
+            "Bryan Adams",
+            "Fury in the Slaughterhouse",
+            "The Hooters"
         ]
       }
 ]
