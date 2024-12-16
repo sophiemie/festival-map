@@ -42,7 +42,7 @@ function addMarkers(map, festivals)
         const marker = L.marker([location.latitude, location.longitude], { icon: customIcon }).addTo(map);
 
         marker.on('click', () => {
-            updateSidebar(festival);
+            updateSidebar(festival, festivals);
         });
     });
 }

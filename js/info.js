@@ -1,5 +1,5 @@
 // Aktualisiert die Sidebar mit Festival-Informationen
-function updateSidebar(festival) {
+function updateSidebar(festival, allFestivals) {
     const { name, location, date, logo, bands, 'ticket-url': ticketUrl } = festival;
 
     document.getElementById('festival-name').textContent = name;
@@ -14,6 +14,14 @@ function updateSidebar(festival) {
     bands.forEach(band => {
         const li = document.createElement('li');
         li.textContent = band;
+        li.classList.add('clickable-band');
+        
+        // Event-Listener für Klick auf eine Band
+        li.addEventListener('click', () => {
+            const relevantFestivals = allFestivals.filter(f => f.bands.includes(band));
+            showPopup(band, relevantFestivals, li);
+        });
+
         bandsList.appendChild(li);
     });
 
@@ -22,7 +30,7 @@ function updateSidebar(festival) {
     document.getElementById('festival-sidebar').style.display = 'block';
 }
 
-
+// Kalender für jedes Festival
 function initializeCalendar(date) {
     const [startDate, endDate] = date.split(' to ');
     const calendarContainer = document.getElementById('festival-calendar');
@@ -36,4 +44,32 @@ function initializeCalendar(date) {
     });
 }
 
-export{ updateSidebar };
+// Zeigt ein Popup mit anderen Festivals für eine Band
+function showPopup(bandName, festivals, targetElement) {
+    const popup = document.getElementById('band-popup');
+    const popupBandName = document.getElementById('popup-band-name');
+    const popupFestivals = document.getElementById('popup-festivals');
+
+    console.log('Popup wird angezeigt für Band:', bandName); // Debugging-Ausgabe
+
+    // Setze die Daten des Popups
+    popupBandName.textContent = `Festivals für: ${bandName}`;
+    popupFestivals.innerHTML = '';
+
+    festivals.forEach(festival => {
+        const li = document.createElement('li');
+        li.textContent = `${festival.name} (${festival.date})`;
+        popupFestivals.appendChild(li);
+    });
+
+    // Positioniere das Popup links vom angeklickten Künstler
+    const rect = targetElement.getBoundingClientRect();
+    popup.style.left = `${rect.left - popup.offsetWidth - 10}px`; // 10px Abstand nach links
+    popup.style.top = `${rect.top}px`;
+
+    popup.classList.remove('hidden');
+    popup.style.display = 'block'; // Stelle sicher, dass das Popup angezeigt wird
+}
+
+
+export { updateSidebar, showPopup };

@@ -157,9 +157,6 @@ body {
 }
 
 
-
-
-
 #festival-sidebar ul {
     list-style: none;
     padding: 0;
@@ -235,3 +232,19 @@ body {
   cursor: not-allowed;
   color: rgba(57,57,57,1.0);
 }
+
+
+#band-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 9999;
+  }
+  
+  #band-popup.hidden {
+    display: none;
+  }
+  
