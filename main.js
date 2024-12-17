@@ -1,5 +1,5 @@
-import { createMap, addMarkers } from './js/map.js';
-import { closePopup } from './js/info.js';
+import { createMap, addMarkers } from './src/components/map.js';
+import { closePopup } from './src/components/info.js';
 
 const map = createMap();
 

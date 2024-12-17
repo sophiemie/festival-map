@@ -90,7 +90,7 @@ function showPopup(bandName, festivals, targetElement) {
     const popupFestivals = document.getElementById('popup-festivals');
 
     // Setze die Daten des Popups
-    popupBandName.textContent = `Festivals mit: ${bandName}`;
+    popupBandName.textContent = `Festivals with: ${bandName}`;
     popupFestivals.innerHTML = '';
 
     festivals.forEach(festival => {
