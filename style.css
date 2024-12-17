@@ -247,7 +247,7 @@ body {
     border: 2px solid #0073e6;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 3px;
     z-index: 1000;
     width: 300px;
     font-family: 'Poppins', sans-serif;
@@ -257,7 +257,7 @@ body {
 #popup-band-name {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
     color: #333;
 }
@@ -287,7 +287,7 @@ body {
     object-fit: cover;
     border: 2px solid #3399ff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Schatten für Tiefe */
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     transition: transform 0.3s;
     background-color: rgba(0, 0, 0, 0.4); /* Halbtransparenter schwarzer Hintergrund */
     padding: 5px; /* Abstand zwischen dem Logo und dem Rand */
