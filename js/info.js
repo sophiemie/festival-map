@@ -28,6 +28,12 @@ function updateSidebar(festival, allFestivals) {
     initializeCalendar(date);
 
     document.getElementById('festival-sidebar').style.display = 'block';
+
+    // Event-Listener für das Schließen der Sidebar
+    document.getElementById('close-sidebar').addEventListener('click', () => {
+        document.getElementById('festival-sidebar').style.display = 'none';
+});
+
 }
 
 // Kalender für jedes Festival

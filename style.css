@@ -180,6 +180,24 @@ body {
     margin-top: 20px;
 }
 
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;  /* Größerer Text für das Kreuz */
+    background: none;  /* Kein Hintergrund */
+    border: none;  /* Kein Rand */
+    color: #333;  /* Dunkelgraue Farbe */
+    cursor: pointer;  /* Zeigt den Mauszeiger als Zeiger an */
+    padding: 0;  /* Kein innerer Abstand */
+    font-family: 'Arial', sans-serif;  /* Schriftart für das Kreuz */
+}
+
+.close-btn:hover {
+    color: #555;  /* Helleres Grau bei Hover */
+}
+
+
 /* Ueberschreibungen von flatpickr.css */
 .flatpickr-day.inRange {
     border-radius: 0 !important; /* Keine Abrundungen in der Mitte */
