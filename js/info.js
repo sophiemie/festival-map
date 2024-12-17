@@ -83,8 +83,6 @@ function showPopup(bandName, festivals, targetElement) {
     const popupBandName = document.getElementById('popup-band-name');
     const popupFestivals = document.getElementById('popup-festivals');
 
-    console.log('Popup wird angezeigt für Band:', bandName); // Debugging-Ausgabe
-
     // Setze die Daten des Popups
     popupBandName.textContent = `Festivals für: ${bandName}`;
     popupFestivals.innerHTML = '';
@@ -95,14 +93,25 @@ function showPopup(bandName, festivals, targetElement) {
         popupFestivals.appendChild(li);
     });
 
-    // Positioniere das Popup links vom angeklickten Künstler
+    // Mache das Popup kurz sichtbar, um Breite und Höhe zu berechnen
+    // Dies war notwendig, da erstes Popup falsche Position hatte
+    popup.style.display = 'block';
+    popup.classList.remove('hidden');
+
+    // Berechne die Position
     const rect = targetElement.getBoundingClientRect();
     popup.style.left = `${rect.left - popup.offsetWidth - 10}px`; // 10px Abstand nach links
     popup.style.top = `${rect.top}px`;
+}
 
-    popup.classList.remove('hidden');
-    popup.style.display = 'block'; // Stelle sicher, dass das Popup angezeigt wird
+function closePopup() {
+    const popup = document.getElementById('band-popup');
+    if (popup) {
+        //popup.classList.add('hidden'); // Falls du Klassen verwendest
+        popup.style.display = 'none'; // Alternativ: Display auf none setzen
+    }
 }
 
 
-export { updateSidebar, showPopup };
+
+export { updateSidebar, showPopup, closePopup };

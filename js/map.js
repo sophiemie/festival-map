@@ -47,4 +47,5 @@ function addMarkers(map, festivals)
     });
 }
 
+
 export{ createMap, addMarkers };
