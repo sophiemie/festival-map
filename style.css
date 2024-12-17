@@ -19,6 +19,13 @@ body {
     object-fit: contain;
 }
 
+/* Festival Icons */
+.leaflet-marker-icon:hover {
+    transform: scale(1.2); /* Vergrößert das Logo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+
 .leaflet-popup-content {
     font-family: Arial, sans-serif; /* Schriftart für Popup */
     font-size: 14px; /* Schriftgröße */
@@ -31,10 +38,6 @@ body {
     background-color: #f9f9f9;
 }
 
-.leaflet-marker-icon:hover {
-    transform: scale(1.2); /* Vergrößert das Logo */
-    box-shadow: 0 0 15px rgba(0, 0, 255, 0.5); /* Fügt einen blauen Schatten hinzu */
-}
 
 #festival-sidebar {
     position: fixed;
@@ -233,18 +236,74 @@ body {
   color: rgba(57,57,57,1.0);
 }
 
-
-#band-popup {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 9999;
-  }
-  
+  /* Popup-Container */
   #band-popup.hidden {
     display: none;
   }
+
+#band-popup {
+    position: absolute;
+    background: white;
+    border: 2px solid #0073e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    width: 300px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Popup-Bandname */
+#popup-band-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #333;
+}
+
+/* Festival-Liste im Popup */
+#popup-festivals {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Einzelne Festival-Elemente */
+.popup-festival-item {
+    text-align: center;
+    width: 80px;
+}
+
+
+/* Festival-Logos */
+.popup-festival-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3399ff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Schatten für Tiefe */
+    margin-bottom: 5px;
+    transition: transform 0.3s;
+    background-color: rgba(0, 0, 0, 0.4); /* Halbtransparenter schwarzer Hintergrund */
+    padding: 5px; /* Abstand zwischen dem Logo und dem Rand */
+    object-fit: contain;
+}
+
+.popup-festival-logo:hover {
+    transform: scale(1.1);   
+}
+
+/* Festival-Name */
+.popup-festival-name {
+    font-size: 12px;
+    color: #555;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
   

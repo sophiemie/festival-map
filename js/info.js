@@ -84,13 +84,25 @@ function showPopup(bandName, festivals, targetElement) {
     const popupFestivals = document.getElementById('popup-festivals');
 
     // Setze die Daten des Popups
-    popupBandName.textContent = `Festivals für: ${bandName}`;
+    popupBandName.textContent = `Festivals mit: ${bandName}`;
     popupFestivals.innerHTML = '';
 
     festivals.forEach(festival => {
-        const li = document.createElement('li');
-        li.textContent = `${festival.name} (${festival.date})`;
-        popupFestivals.appendChild(li);
+        const festivalItem = document.createElement('li');
+        festivalItem.classList.add('popup-festival-item');
+
+        // Erstelle das Festival-Logo und beschriftung
+        const logo = document.createElement('img');
+        logo.src = festival.logo;
+        logo.alt = festival.name;
+        logo.title = festival.name;
+        logo.classList.add('popup-festival-logo');
+
+        const festivalName = document.createElement('span');
+        festivalName.textContent = festival.name;
+
+        festivalItem.appendChild(logo);
+        popupFestivals.appendChild(festivalItem);
     });
 
     // Mache das Popup kurz sichtbar, um Breite und Höhe zu berechnen
