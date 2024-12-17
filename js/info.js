@@ -114,6 +114,27 @@ function showPopup(bandName, festivals, targetElement) {
     const rect = targetElement.getBoundingClientRect();
     popup.style.left = `${rect.left - popup.offsetWidth - 10}px`; // 10px Abstand nach links
     popup.style.top = `${rect.top}px`;
+
+    // Positionierung relativ zum Marker-Element
+    let left = rect.left;
+    let top = rect.bottom;
+
+    // Überprüfen, ob das Popup außerhalb des Viewports liegt
+    const popupHeight = popup.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
+    // Nach unten korrigieren, falls außerhalb des unteren Rands
+    if (top + popupHeight > viewportHeight) {
+        top = rect.top - popupHeight - 1; // Über dem Element anzeigen
+    }
+
+    // Nach oben korrigieren, falls außerhalb des oberen Rands
+    if (top < 0) {
+        top = 10; // 10px Abstand zum oberen Rand
+    }
+
+    // Setze die berechnete Position
+    popup.style.top = `${top}px`;
 }
 
 function closePopup() {
