@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Last.fm Artist API
+  description: API zum Abrufen von Künstler-Infos von Last.fm
+  version: 1.0.0
+
+paths:
+  /api/artist/{name}:
+    get:
+      summary: Holt Infos zu einem Künstler von Last.fm
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          description: Name des Künstlers
+      responses:
+        "200":
+          description: Erfolgreiche Antwort mit Künstler-Infos
+        "500":
+          description: Fehler beim Abruf
