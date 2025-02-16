@@ -7,7 +7,7 @@ info:
 paths:
   /api/artist/{name}:
     get:
-      summary: Holt Infos zu einem Künstler von Last.fm
+      summary: Gibt ähnliche Künstler zurück
       parameters:
         - in: path
           name: name

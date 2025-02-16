@@ -1,15 +1,20 @@
 import { getArtistInfo } from "../services/lastfmService.js";
 
 const fetchArtistInfo = async (req, res) => {
-    try {
-        const artistName = req.params.name;
-        console.log(`Anfrage für Künstler: ${artistName}`); // Logging hinzufügen
+    const { name } = req.params;
+    if (!name) {
+        return res.status(400).json({ error: "Künstlername ist erforderlich" });
+    }
 
-        const data = await getArtistInfo(artistName);
-        res.json(data);
+    try {
+        const artistInfo = await getArtistInfo(name);
+        if (!artistInfo) {
+            return res.status(404).json({ error: "Künstler nicht gefunden" });
+        }
+        res.status(200).json(artistInfo);
     } catch (error) {
-        console.error("Fehler beim Abruf von Last.fm:", error);
-        res.status(500).json({ error: "Fehler beim Abruf der Daten" });
+        console.error("Fehler im Controller:", error);
+        res.status(500).json({ error: error.message });
     }
 };
 
