@@ -16,3 +16,7 @@ Starte Backend mit:
 ```bash
 node server.js
 ```
+
+docker-compose build --no-cache
+docker-compose up
+

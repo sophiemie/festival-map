@@ -1,0 +1,15 @@
+{
+  "name": "festival-map-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx vite"
+  },
+  "dependencies": {
+    "flatpickr": "^4.6.13",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "rollup": "^4.28.1",
+    "vite": "^6.1.0"
+  }
+}
