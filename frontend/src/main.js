@@ -1,5 +1,7 @@
 import { createMap, addMarkers } from './components/map.js';
 import { closePopup } from './components/info.js';
+import './components/bandsearch.js';
+
 
 // Warte, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {

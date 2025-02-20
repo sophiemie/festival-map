@@ -257,8 +257,8 @@ body {
   color: rgba(57,57,57,1.0);
 }
 
-  /* Popup-Container */
-  #band-popup.hidden {
+  /* Popup-Container und Bandliste bei der Suche */
+.hidden {
     display: none;
   }
 
@@ -370,4 +370,32 @@ body {
 #search-input:focus {
     border-color: #007bff;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+/*Bandliste beim Suchfeld*/
+
+
+#band-list {
+    position: absolute;
+    top: calc(30px); /* Direkt unter dem Suchfeld */
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 200px; /* Höhe der Box */
+    overflow-y: auto; /* Scrollen bei Überlauf */
+    background-color: white; /* Hintergrundfarbe der Liste */
+    border: 1px solid #ddd; /* Rahmen für die Liste */
+    border-radius: 5px; /* Abgerundete Ecken */
+    z-index: 100; /* Höher als die Karte */
+    width: 100%; /* Breite der Liste anpassen */
+    padding: 5px; /* Padding für eine bessere Darstellung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatten für einen 3D-Effekt */
+}
+
+#band-list li {
+    padding: 8px; /* Innenabstand für die Listenelemente */
+    cursor: pointer; /* Zeigt an, dass die Elemente klickbar sind */
+}
+
+#band-list li:hover {
+    background-color: #f0f0f0; /* Hintergrundfarbe bei Hover */
 }
