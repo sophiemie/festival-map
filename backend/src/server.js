@@ -13,7 +13,8 @@ const PORT = 4000;
 app.use(cors()); // CORS für alle Anfragen aktivieren
 
 // Swagger laden
-const swaggerDocument = yamljs.load("src/docs/swagger.yaml");
+//const swaggerDocument = yamljs.load("src/docs/swagger.yaml"); // Für Docker
+const swaggerDocument = yamljs.load("docs/swagger.yaml"); // Lokal
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routen einbinden

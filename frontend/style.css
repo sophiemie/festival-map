@@ -6,8 +6,9 @@ body {
 #map {
     border: 2px solid #333;
     border-radius: 10px;
-    height: 84vh; /* Vollbildhöhe */
+    height: 98vh; /* Vollbildhöhe */
     width: 100%;
+    z-index: 10;
 }
 
 .leaflet-marker-icon {
@@ -42,7 +43,7 @@ body {
 
 #festival-sidebar {
     position: fixed;
-    top: 160px; /* Höhe der Sidebar */
+    top: 20px; /* Höhe der Sidebar */
     right: 20px;
     bottom: 20px;
     width: 320px;
@@ -330,24 +331,30 @@ body {
 /* Ueberschrift */
 
 #festival-title {
+    position: absolute;
+    top: 1px;
+    left: 250px;
+    transform: translateX(-50%);
     font-family: 'Poppins', sans-serif;
     font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    margin-top: 20px;
-    color: #333;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 100; /* Höher als die Karte */
 }
 
-/* Bandeingabe */
-
 #search-container {
+    position: absolute;
+    top: 70px;
+    left: 180px;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin: 15px auto;
     max-width: 400px;
+    z-index: 100; /* Höher als die Karte */
 }
 
 #search-input {

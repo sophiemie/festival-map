@@ -10,13 +10,19 @@ npm install cors
 
 Starte Frontend mit:
 ```bash
+cd frontend
 npx vite
 ```
 Starte Backend mit:
 ```bash
+cd backend
+cd src
 node server.js
 ```
 
+Starte mit Docker:
+```
 docker-compose build --no-cache
 docker-compose up
+```
 
