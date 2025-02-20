@@ -2,7 +2,7 @@
   "name": "festival-map-frontend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npx vite"
+    "dev": "npx vite --host"
   },
   "dependencies": {
     "flatpickr": "^4.6.13",

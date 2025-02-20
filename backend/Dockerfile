@@ -2,20 +2,21 @@
 FROM node:18
 
 # Arbeitsverzeichnis setzen
-WORKDIR /src
-
-# Abhängigkeiten kopieren und installieren
-COPY package.json package-lock.json ./
-RUN npm install
+WORKDIR /data
 
 # Source-Code kopieren
-COPY . .
+COPY /src /data/src
+
+# Abhängigkeiten kopieren und installieren
+COPY package.json /data
+
+RUN npm install
 
 # Sicherstellen, dass die Swagger-Datei existiert
-RUN ls -la docs/
+RUN ls -la /data/src/docs
 
 # Port für den Server öffnen
 EXPOSE 4000
 
 # Server starten (richtiger Pfad)
-CMD ["node", "server.js"]
+CMD ["npm", "start"]

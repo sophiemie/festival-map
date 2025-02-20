@@ -2,14 +2,13 @@
 FROM node:18
 
 # Arbeitsverzeichnis setzen
-WORKDIR /src
-
-# Abhängigkeiten kopieren und installieren
-COPY package.json package-lock.json ./
-RUN npm install
+WORKDIR /data
 
 # Source-Code kopieren
-COPY . .
+COPY . /data
+
+# Abhängigkeiten kopieren und installieren
+RUN npm install
 
 # Port für Vite öffnen
 EXPOSE 5173
