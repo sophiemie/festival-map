@@ -44,25 +44,29 @@ function displayBands(bands) {
         bandList.appendChild(li);
     });
 
-    // Bestätigungs-Button hinzufügen
-    const confirmButton = document.createElement('button');
-    confirmButton.id = 'confirm-button';
-    confirmButton.textContent = 'Bestätigen';
-    confirmButton.disabled = true;
-    confirmButton.addEventListener('click', () => {
-        const selectedBands = Array.from(document.querySelectorAll("#band-list input[type='checkbox']:checked"))
-            .map(checkbox => checkbox.nextSibling.textContent);
+    // Bestätigungs-Button hinzufügen (falls nicht schon vorhanden)
+    if (!document.getElementById('confirm-button')) {
+        const confirmButton = document.createElement('button');
+        confirmButton.id = 'confirm-button';
+        confirmButton.textContent = 'Confirm';
+        confirmButton.disabled = true;
+        confirmButton.addEventListener('click', () => {
+            const selectedBands = Array.from(document.querySelectorAll("#band-list input[type='checkbox']:checked"))
+                .map(checkbox => checkbox.nextSibling.textContent);
 
-        console.log("Ausgewählte Bands:", selectedBands);
-        alert("Du hast folgende Bands ausgewählt: " + selectedBands.join(", "));
+            console.log("Ausgewählte Bands:", selectedBands);
+            alert("Du hast folgende Bands ausgewählt: " + selectedBands.join(", "));
 
-        // Liste ausblenden nach Bestätigung
-        bandList.classList.add('hidden');
-    });
+            bandList.classList.add('hidden'); // Liste nach Bestätigung ausblenden
+        });
 
-    bandList.appendChild(confirmButton);
+        bandList.appendChild(confirmButton);
+    }
+
     bandList.classList.remove('hidden'); // Liste sichtbar machen
+    bandList.style.display = 'block'; // Falls nötig, sicherstellen, dass sie sichtbar ist
 }
+
 
 // Funktion zum Aktivieren/Deaktivieren des Buttons
 function updateConfirmButton() {
@@ -86,15 +90,22 @@ document.getElementById("search-input").addEventListener("focus", async () => {
     displayBands(bands);
 });
 
-// Event-Listener für das Schließen der Liste beim Klicken außerhalb
 document.addEventListener('click', (event) => {
     const searchInput = document.getElementById('search-input');
     const bandList = document.getElementById('band-list');
 
     if (!searchInput.contains(event.target) && !bandList.contains(event.target)) {
-        bandList.classList.add('hidden'); // Liste verstecken
+        bandList.classList.add('hidden'); // Liste ausblenden
+        bandList.style.display = 'none'; // Sicherstellen, dass sie unsichtbar ist
     }
 });
+
+// Falls du möchtest, dass die Liste erst beim Fokus auf das Suchfeld erscheint:
+document.getElementById("search-input").addEventListener("focus", async () => {
+    const bands = await fetchAndFilterBands();
+    displayBands(bands);
+});
+
 
 // Klick ins Suchfeld verhindert Schließen der Liste
 document.getElementById("search-input").addEventListener("click", (event) => {
