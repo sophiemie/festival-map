@@ -391,11 +391,38 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatten für einen 3D-Effekt */
 }
 
-#band-list li {
-    padding: 8px; /* Innenabstand für die Listenelemente */
-    cursor: pointer; /* Zeigt an, dass die Elemente klickbar sind */
-}
-
 #band-list li:hover {
     background-color: #f0f0f0; /* Hintergrundfarbe bei Hover */
 }
+
+#band-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+#band-list li.checked {
+    font-weight: bold;
+}
+
+/* Button für Band bestätigen */
+#confirm-button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #ccc; /* Standard: Grau, deaktiviert */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    font-size: 16px;
+}
+
+#confirm-button.active {
+    background-color: #007bff; /* Blau, wenn aktiv */
+    cursor: pointer;
+}
+

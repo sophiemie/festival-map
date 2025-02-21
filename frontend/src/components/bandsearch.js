@@ -1,49 +1,83 @@
-// bandsearch.js
-
 // Funktion zum Abrufen und Filtern der Bands aus der JSON
 async function fetchAndFilterBands() {
     try {
         const response = await fetch('festivals2025.json');
         const data = await response.json();
 
-        // Alle Bands in ein Set hinzufügen, um Duplikate zu vermeiden
         const bandsSet = new Set();
         data.forEach(festival => {
-            festival.bands.forEach(band => {
-                bandsSet.add(band);
-            });
+            festival.bands.forEach(band => bandsSet.add(band));
         });
 
-        // Rückgabe der einzigartigen Bands als Array
         return Array.from(bandsSet);
     } catch (error) {
         console.error('Fehler beim Abrufen der Bands:', error);
     }
 }
 
-// Beispiel für das Hinzufügen von Bands zur Liste
+// Funktion zur Anzeige der Bands mit Checkboxen und Bestätigungs-Button
 function displayBands(bands) {
     const bandList = document.getElementById('band-list');
-
-    if (!bandList) {
-        console.error("Das Element mit der ID 'band-list' konnte nicht gefunden werden.");
-        return; // Beende die Funktion, wenn das Element nicht gefunden wurde
-    }
+    if (!bandList) return;
 
     bandList.innerHTML = ''; // Vorherige Einträge leeren
 
     bands.forEach(band => {
         const li = document.createElement('li');
-        li.textContent = band;
-        li.addEventListener('click', () => {
-            // Aktion bei Klick auf die Band
-            console.log(`Band selected: ${band}`);
-            // Hier kannst du die Aktion definieren, die passieren soll
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', updateConfirmButton);
+
+        const bandName = document.createElement('span');
+        bandName.textContent = band;
+
+        li.addEventListener('click', (event) => {
+            if (event.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+                updateConfirmButton();
+            }
         });
+
+        li.appendChild(checkbox);
+        li.appendChild(bandName);
         bandList.appendChild(li);
     });
 
-    bandList.classList.toggle('hidden', bands.length === 0); // Verstecke die Liste, wenn keine Bands vorhanden sind
+    // Bestätigungs-Button hinzufügen
+    const confirmButton = document.createElement('button');
+    confirmButton.id = 'confirm-button';
+    confirmButton.textContent = 'Bestätigen';
+    confirmButton.disabled = true;
+    confirmButton.addEventListener('click', () => {
+        const selectedBands = Array.from(document.querySelectorAll("#band-list input[type='checkbox']:checked"))
+            .map(checkbox => checkbox.nextSibling.textContent);
+
+        console.log("Ausgewählte Bands:", selectedBands);
+        alert("Du hast folgende Bands ausgewählt: " + selectedBands.join(", "));
+
+        // Liste ausblenden nach Bestätigung
+        bandList.classList.add('hidden');
+    });
+
+    bandList.appendChild(confirmButton);
+    bandList.classList.remove('hidden'); // Liste sichtbar machen
+}
+
+// Funktion zum Aktivieren/Deaktivieren des Buttons
+function updateConfirmButton() {
+    const checkboxes = document.querySelectorAll("#band-list input[type='checkbox']");
+    const confirmButton = document.getElementById('confirm-button');
+
+    const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+    if (isChecked) {
+        confirmButton.classList.add('active');
+        confirmButton.disabled = false;
+    } else {
+        confirmButton.classList.remove('active');
+        confirmButton.disabled = true;
+    }
 }
 
 // Event-Listener für das Suchfeld
@@ -58,11 +92,11 @@ document.addEventListener('click', (event) => {
     const bandList = document.getElementById('band-list');
 
     if (!searchInput.contains(event.target) && !bandList.contains(event.target)) {
-        bandList.classList.add('hidden'); // Verstecke die Liste
+        bandList.classList.add('hidden'); // Liste verstecken
     }
 });
 
-// Optional: Event-Listener für das Klicken des Suchfelds, um die Liste anzuzeigen
+// Klick ins Suchfeld verhindert Schließen der Liste
 document.getElementById("search-input").addEventListener("click", (event) => {
-    event.stopPropagation(); // Verhindere das Schließen der Liste beim Klicken auf das Suchfeld
+    event.stopPropagation();
 });
