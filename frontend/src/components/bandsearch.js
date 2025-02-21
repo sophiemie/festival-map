@@ -67,7 +67,6 @@ function displayBands(bands) {
     bandList.style.display = 'block'; // Falls nötig, sicherstellen, dass sie sichtbar ist
 }
 
-
 // Funktion zum Aktivieren/Deaktivieren des Buttons
 function updateConfirmButton() {
     const checkboxes = document.querySelectorAll("#band-list input[type='checkbox']");
@@ -84,10 +83,24 @@ function updateConfirmButton() {
     }
 }
 
+// Funktion zum Filtern der Bands basierend auf dem Suchbegriff
+function filterBands(bands, searchTerm) {
+    return bands.filter(band => band.toLowerCase().includes(searchTerm.toLowerCase()));
+}
+
 // Event-Listener für das Suchfeld
+let allBands = []; // Array zum Speichern aller Bands
+
 document.getElementById("search-input").addEventListener("focus", async () => {
-    const bands = await fetchAndFilterBands();
-    displayBands(bands);
+    allBands = await fetchAndFilterBands(); // Alle Bands beim Fokussieren abrufen
+    displayBands(allBands); // Alle Bands anzeigen
+});
+
+// Eingabeereignis für das Suchfeld hinzufügen
+document.getElementById("search-input").addEventListener("input", () => {
+    const searchTerm = document.getElementById("search-input").value;
+    const filteredBands = filterBands(allBands, searchTerm); // Bands filtern
+    displayBands(filteredBands); // Gefilterte Bands anzeigen
 });
 
 document.addEventListener('click', (event) => {
@@ -99,13 +112,6 @@ document.addEventListener('click', (event) => {
         bandList.style.display = 'none'; // Sicherstellen, dass sie unsichtbar ist
     }
 });
-
-// Falls du möchtest, dass die Liste erst beim Fokus auf das Suchfeld erscheint:
-document.getElementById("search-input").addEventListener("focus", async () => {
-    const bands = await fetchAndFilterBands();
-    displayBands(bands);
-});
-
 
 // Klick ins Suchfeld verhindert Schließen der Liste
 document.getElementById("search-input").addEventListener("click", (event) => {

@@ -378,7 +378,7 @@ body {
 #band-list {
     position: absolute;
     top: calc(30px); /* Direkt unter dem Suchfeld */
-    left: 50%;
+    left: 68%;
     transform: translateX(-50%);
     max-height: 200px; /* Höhe der Box */
     overflow-y: auto; /* Scrollen bei Überlauf */
@@ -386,11 +386,13 @@ body {
     border: 1px solid #ddd; /* Rahmen für die Liste */
     border-radius: 5px; /* Abgerundete Ecken */
     z-index: 100; /* Höher als die Karte */
-    width: 100%; /* Breite der Liste anpassen */
+    width: 130%; /* Breite der Liste anpassen */
     padding: 5px; /* Padding für eine bessere Darstellung */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatten für einen 3D-Effekt */
     display: none;
     flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(20px);
 }
 
 #band-list ul {
@@ -409,6 +411,7 @@ body {
 #band-list li {
     display: flex;
     align-items: center;
+    font-family: 'Poppins', sans-serif;
     gap: 8px;
     padding: 8px;
     cursor: pointer;
@@ -438,3 +441,17 @@ body {
     cursor: pointer;
 }
 
+/* Leaflet Zoom Icon */
+
+.leaflet-left .leaflet-control {
+    margin-left: 12px;
+}
+
+.leaflet-top .leaflet-control {
+    margin-top: 25px;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
