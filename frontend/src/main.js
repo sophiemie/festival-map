@@ -1,7 +1,7 @@
 import { createMap, addMarkers } from './components/map.js';
 import { closePopup } from './components/info.js';
+import { addDraggableMarker } from './components/marker.js'; // Importiere die Marker-Funktion
 import './components/bandsearch.js';
-
 
 // Warte, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
             addMarkers(map, data);
         })
         .catch(error => console.error('Error loading the JSON file:', error));
+
+    // Füge die Funktion zum Hinzufügen des verschiebbaren Markers hinzu
+    addDraggableMarker(map); // map übergeben
 
     // Listener, um das Band-Pop-up zu schließen
     document.addEventListener('click', (event) => {
@@ -35,10 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(`API-Abfrage für: ${artistName}`);
 
                 try {
-                    //const response = await fetch(`/api/artist/${encodeURIComponent(artistName)}`);
-                    //const response = await fetch(`/api/artist/${artistName}`);
                     const response = await fetch(`http://localhost:4000/api/artist/${artistName}`);
-
 
                     if (!response.ok) throw new Error("Fehlerhafte API-Antwort");
                     const artistData = await response.json();
