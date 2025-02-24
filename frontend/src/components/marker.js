@@ -1,65 +1,47 @@
-let draggableMarker;
-let radiusCircle;
-let map; // map hier definieren
-
-function addDraggableMarker(m) {
-    map = m; // map zuweisen
-    const addButton = document.getElementById('add-marker'); // Button hinzufügen
+function toggleDraggableMarker(map) {
     const rangeInput = document.getElementById('range-input');
+    const removeMarkerIcon = document.getElementById('remove-marker');
 
-    addButton.addEventListener('click', () => {
-        // Falls bereits ein Marker existiert, aktualisiere seine Position
-        if (draggableMarker) {
-            draggableMarker.setLatLng(map.getCenter());
-            updateRadiusCircle();
-        } else {
-            // Erstelle einen neuen Marker
-            draggableMarker = L.marker(map.getCenter(), {
-                draggable: true,
-                icon: L.icon({
-                    iconUrl: 'images/marker.png', // Pfad zu deinem Marker-Bild
-                    iconSize: [30, 30], // Größe des Icons
-                    iconAnchor: [15, 30], // Punkt, an dem das Icon auf die Karte zeigt
-                    popupAnchor: [0, -30] // Punkt, an dem das Popup erscheint
-                })
-            }).addTo(map);
+    if (!map) return console.error("Map ist nicht definiert!");
 
-            // Initialisiere den Radiuskreis
-            updateRadiusCircle();
+    if (window.userMarker) {
+        map.removeLayer(window.userMarker);
+        map.removeLayer(window.userCircle);
+        window.userMarker = null;
+        window.userCircle = null;
+        rangeInput.style.display = 'none'; // Eingabefeld verstecken
+        removeMarkerIcon.style.display = 'none'; // "X" verstecken
+        return;
+    }
 
-            // Event-Listener für Marker-Drag-Ende
-            draggableMarker.on('dragend', (event) => {
-                const marker = event.target;
-                const position = marker.getLatLng();
-                console.log(`Neuer Marker-Standort: ${position.lat}, ${position.lng}`);
-                updateRadiusCircle(); // Aktualisiere den Radiuskreis beim Ziehen
-            });
-        }
+    const icon = L.icon({
+        iconUrl: 'images/marker.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
     });
 
-    // Event-Listener, um den Radius zu aktualisieren
-    rangeInput.addEventListener('input', updateRadiusCircle);
+    const marker = L.marker(map.getCenter(), {
+        icon: icon,
+        draggable: true
+    }).addTo(map);
+
+    const radius = rangeInput.value || 100;
+    let circle = L.circle(marker.getLatLng(), { radius: radius * 1000 }).addTo(map);
+
+    window.userMarker = marker;
+    window.userCircle = circle;
+
+    rangeInput.style.display = 'inline-block'; // Eingabefeld anzeigen
+    removeMarkerIcon.style.display = 'block'; // "X" anzeigen
+
+    marker.on('drag', () => {
+        circle.setLatLng(marker.getLatLng());
+    });
+
+    rangeInput.addEventListener('input', (e) => {
+        circle.setRadius(e.target.value * 1000);
+    });
 }
 
-function updateRadiusCircle() {
-    const rangeInput = document.getElementById('range-input');
-    const radius = parseFloat(rangeInput.value) || 0; // Standardwert auf 0 setzen
 
-    // Wenn der Kreis bereits existiert, entferne ihn
-    if (radiusCircle) {
-        map.removeLayer(radiusCircle);
-    }
-
-    // Füge einen neuen Kreis hinzu, wenn der Radius größer als 0 ist
-    if (radius > 0 && draggableMarker) {
-        radiusCircle = L.circle(draggableMarker.getLatLng(), {
-            radius: radius * 1000, // Umrechnung von km in Meter
-            color: 'blue',
-            fillColor: 'blue',
-            fillOpacity: 0.1
-        }).addTo(map); // map hier korrekt verwenden
-    }
-}
-
-// Exportiere die Funktion
-export { addDraggableMarker };
+export { toggleDraggableMarker };

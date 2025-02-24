@@ -1,7 +1,8 @@
 import { createMap, addMarkers } from './components/map.js';
 import { closePopup } from './components/info.js';
-import { addDraggableMarker } from './components/marker.js'; // Importiere die Marker-Funktion
+import { toggleDraggableMarker } from './components/marker.js';// Importiere die Marker-Funktion
 import './components/bandsearch.js';
+
 
 // Warte, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error('Error loading the JSON file:', error));
 
     // Füge die Funktion zum Hinzufügen des verschiebbaren Markers hinzu
-    addDraggableMarker(map); // map übergeben
+    toggleDraggableMarker(map); // map übergeben
 
     // Listener, um das Band-Pop-up zu schließen
     document.addEventListener('click', (event) => {
@@ -58,4 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const bio = data.artist?.bio?.summary || "Keine Biografie verfügbar.";
         alert(`Name: ${name}\nInfo: ${bio}`); // Später in UI einbauen
     };
+
+
+    document.getElementById('marker-button').addEventListener('click', () => {
+        toggleDraggableMarker(map);
+    });
 });

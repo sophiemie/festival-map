@@ -1,8 +1,18 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import path from "path";
 
-dotenv.config({ path: '../.env' });
+// __dirname in ES-Modulen definieren
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+//dotenv.config({ path: '../.env' });
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+console.log(process.env.LASTFM_API_KEY);
+console.log(__dirname);
 console.log("Last.fm API Key aus .env:", process.env.LASTFM_API_KEY);
 
 const cache = {}; // Objekt als einfacher Cache

@@ -458,7 +458,10 @@ body {
 
 /* Marker auf der Karte */
 #marker {
+    display: flex;
+    align-items: center;
     position: absolute;
+    gap: 5px;
     top: 60px; /* Abstand von oben */
     left: 300px; /* Abstand von links */
     z-index: 1000; /* Damit es über der Karte angezeigt wird */
@@ -475,3 +478,35 @@ body {
     outline: none;
     transition: all 0.3s ease-in-out;
 }
+
+#marker-button {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+#marker-button img {
+    width: 100%;
+    height: auto;
+}
+
+#remove-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    cursor: pointer;
+}
+
+#remove-marker:hover {
+    color: darkred;
+}
+
