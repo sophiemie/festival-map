@@ -1,3 +1,5 @@
+let selectedBands = []; // Zustand zum Speichern der ausgewählten Bands
+
 // Funktion zum Abrufen und Filtern der Bands aus der JSON
 async function fetchAndFilterBands() {
     try {
@@ -27,15 +29,23 @@ function displayBands(bands) {
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.addEventListener('change', updateConfirmButton);
+        checkbox.checked = selectedBands.includes(band); // Checkbox-Status setzen
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                selectedBands.push(band); // Band zur Auswahl hinzufügen
+            } else {
+                selectedBands = selectedBands.filter(b => b !== band); // Band von der Auswahl entfernen
+            }
+            updateConfirmButton();
+        });
 
         const bandName = document.createElement('span');
         bandName.textContent = band;
 
         li.addEventListener('click', (event) => {
             if (event.target !== checkbox) {
-                checkbox.checked = !checkbox.checked;
-                updateConfirmButton();
+                checkbox.checked = !checkbox.checked; // Checkbox umschalten
+                checkbox.dispatchEvent(new Event('change')); // change-Event auslösen
             }
         });
 
@@ -49,39 +59,34 @@ function displayBands(bands) {
         const confirmButton = document.createElement('button');
         confirmButton.id = 'confirm-button';
         confirmButton.textContent = 'Confirm';
-        confirmButton.disabled = true;
+        confirmButton.disabled = selectedBands.length === 0; // Button-Status beim Hinzufügen
         confirmButton.addEventListener('click', () => {
-            const selectedBands = Array.from(document.querySelectorAll("#band-list input[type='checkbox']:checked"))
-                .map(checkbox => checkbox.nextSibling.textContent);
-
             console.log("Ausgewählte Bands:", selectedBands);
             alert("Du hast folgende Bands ausgewählt: " + selectedBands.join(", "));
-
             bandList.classList.add('hidden'); // Liste nach Bestätigung ausblenden
+            bandList.style.display = 'none'; // Sicherstellen, dass sie unsichtbar ist
         });
 
         bandList.appendChild(confirmButton);
     }
 
+    updateConfirmButton(); // Bestätigungs-Button aktualisieren
     bandList.classList.remove('hidden'); // Liste sichtbar machen
     bandList.style.display = 'block'; // Falls nötig, sicherstellen, dass sie sichtbar ist
 }
 
 // Funktion zum Aktivieren/Deaktivieren des Buttons
 function updateConfirmButton() {
-    const checkboxes = document.querySelectorAll("#band-list input[type='checkbox']");
     const confirmButton = document.getElementById('confirm-button');
-
-    const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-
-    if (isChecked) {
-        confirmButton.classList.add('active');
-        confirmButton.disabled = false;
+    const isActive = selectedBands.length > 0; // Button aktiv, wenn Bands ausgewählt sind
+    confirmButton.disabled = !isActive; // Button aktivieren/deaktivieren
+    if (isActive) {
+        confirmButton.classList.add('active'); // Klasse hinzufügen, wenn aktiv
     } else {
-        confirmButton.classList.remove('active');
-        confirmButton.disabled = true;
+        confirmButton.classList.remove('active'); // Klasse entfernen, wenn inaktiv
     }
 }
+
 
 // Funktion zum Filtern der Bands basierend auf dem Suchbegriff
 function filterBands(bands, searchTerm) {
