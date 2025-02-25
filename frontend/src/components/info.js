@@ -15,8 +15,7 @@ function updateSidebar(festival, allFestivals) {
         const li = document.createElement('li');
         li.textContent = band;
         li.classList.add('clickable-band');
-        
-        // Event-Listener für Klick auf eine Band
+
         li.addEventListener('click', () => {
             const relevantFestivals = allFestivals.filter(f => f.bands.includes(band));
             showPopup(band, relevantFestivals, li);
@@ -25,16 +24,27 @@ function updateSidebar(festival, allFestivals) {
         bandsList.appendChild(li);
     });
 
+    // Falls der Marker aktiv ist, berechne die Distanz und füge sie unter dem Ort ein
+    const distanceElement = document.getElementById('festival-distance');
+    if (window.userMarker) {
+        const userLatLng = window.userMarker.getLatLng();
+        const festivalLatLng = L.latLng(location.latitude, location.longitude);
+
+        const distance = userLatLng.distanceTo(festivalLatLng) / 1000; // in km
+        distanceElement.textContent = `(${distance.toFixed(1)} km)`;
+    } else {
+        distanceElement.textContent = ''; // Keine Distanz anzeigen, wenn Marker fehlt
+    }
+
     initializeCalendar(date);
 
     document.getElementById('festival-sidebar').style.display = 'block';
 
-    // Event-Listener für das Schließen der Sidebar
     document.getElementById('close-sidebar').addEventListener('click', () => {
         document.getElementById('festival-sidebar').style.display = 'none';
-});
-
+    });
 }
+
 
 // Kalender für jedes Festival
 function initializeCalendar(date) {

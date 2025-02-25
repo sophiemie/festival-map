@@ -33,8 +33,8 @@ function toggleDraggableMarker(map) {
         map.removeLayer(window.userCircle);
         window.userMarker = null;
         window.userCircle = null;
-        rangeInput.style.display = 'none'; // Eingabefeld verstecken
-        removeMarkerIcon.style.display = 'none'; // "X" verstecken
+        rangeInput.style.display = 'none';
+        removeMarkerIcon.style.display = 'none';
         return;
     }
 
@@ -55,18 +55,25 @@ function toggleDraggableMarker(map) {
     window.userMarker = marker;
     window.userCircle = circle;
 
-    rangeInput.style.display = 'inline-block'; // Eingabefeld anzeigen
-    removeMarkerIcon.style.display = 'block'; // "X" anzeigen
+    rangeInput.style.display = 'inline-block';
+    removeMarkerIcon.style.display = 'block';
 
     marker.on('drag', () => {
         circle.setLatLng(marker.getLatLng());
         calculateDistances(marker.getLatLng());
     });
 
+    marker.on('dragend', () => {
+        calculateDistances(marker.getLatLng()); // Sofort nach dem Loslassen berechnen
+    });
+
     rangeInput.addEventListener('input', (e) => {
         circle.setRadius(e.target.value * 1000);
     });
+
+    calculateDistances(marker.getLatLng()); // Direkt nach Setzen des Markers berechnen
 }
+
 
 function calculateDistances(userPosition) {
     const userCoord = {
@@ -75,7 +82,6 @@ function calculateDistances(userPosition) {
     };
 
     const distances = festivals.map(festival => {
-        console.log("Festival-Daten:", festival.location.latitude, festival.location.longitude); // Debugging
         const festivalCoord = {
             latitude: Number(festival.location.latitude),
             longitude: Number(festival.location.longitude)
@@ -83,12 +89,29 @@ function calculateDistances(userPosition) {
         const distance = haversineDistance(userCoord, festivalCoord);
         return {
             name: festival.name,
-            distance: isNaN(distance) ? "Fehler!" : distance.toFixed(2) + " km"
+            distance: isNaN(distance) ? "Fehler!" : distance.toFixed(1) + " km"
         };
     });
 
-    console.log(distances);
+    updateSidebar(distances);
 }
+
+function updateSidebar(distances) {
+    distances.forEach(entry => {
+        console.log(`Suche nach: ${entry.name}`); // Debugging
+
+        // Hier wird angenommen, dass jedes Festival ein Element mit einer ID hat, die auf dem Festivalnamen basiert.
+        const festivalDistanceElement = document.getElementById(`distance-${entry.name}`);
+
+        if (festivalDistanceElement) {
+            console.log(`Aktualisiere ${entry.name} mit ${entry.distance}`); // Debugging
+            festivalDistanceElement.textContent = entry.distance;
+        }
+    });
+}
+
+
+
 
 
 export { toggleDraggableMarker };
