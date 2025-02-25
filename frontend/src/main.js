@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error('Error loading the JSON file:', error));
 
-    // Füge die Funktion zum Hinzufügen des verschiebbaren Markers hinzu
-    toggleDraggableMarker(map); // map übergeben
-
     // Listener, um das Band-Pop-up zu schließen
     document.addEventListener('click', (event) => {
         const popup = document.getElementById('band-popup');

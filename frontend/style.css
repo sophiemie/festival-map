@@ -477,6 +477,7 @@ body {
     border-radius: 25px;
     outline: none;
     transition: all 0.3s ease-in-out;
+    display: none;
 }
 
 #marker-button {

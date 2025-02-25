@@ -1,3 +1,27 @@
+import festivals from '../../festivals2025.json'; // Stelle sicher, dass der Pfad korrekt ist
+
+function haversineDistance(coord1, coord2) {
+    const toRad = (x) => (Number(x) * Math.PI) / 180; // Sicherstellen, dass es eine Zahl ist
+
+    const lat1 = toRad(coord1.latitude);
+    const lon1 = toRad(coord1.longitude);
+    const lat2 = toRad(coord2.latitude);
+    const lon2 = toRad(coord2.longitude);
+
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const R = 6371; // Erdradius in Kilometern
+    return R * c; // Entfernung in Kilometern
+}
+
+
 function toggleDraggableMarker(map) {
     const rangeInput = document.getElementById('range-input');
     const removeMarkerIcon = document.getElementById('remove-marker');
@@ -36,11 +60,34 @@ function toggleDraggableMarker(map) {
 
     marker.on('drag', () => {
         circle.setLatLng(marker.getLatLng());
+        calculateDistances(marker.getLatLng());
     });
 
     rangeInput.addEventListener('input', (e) => {
         circle.setRadius(e.target.value * 1000);
     });
+}
+
+function calculateDistances(userPosition) {
+    const userCoord = {
+        latitude: Number(userPosition.lat),
+        longitude: Number(userPosition.lng)
+    };
+
+    const distances = festivals.map(festival => {
+        console.log("Festival-Daten:", festival.location.latitude, festival.location.longitude); // Debugging
+        const festivalCoord = {
+            latitude: Number(festival.location.latitude),
+            longitude: Number(festival.location.longitude)
+        };
+        const distance = haversineDistance(userCoord, festivalCoord);
+        return {
+            name: festival.name,
+            distance: isNaN(distance) ? "Fehler!" : distance.toFixed(2) + " km"
+        };
+    });
+
+    console.log(distances);
 }
 
 
