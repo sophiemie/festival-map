@@ -464,7 +464,7 @@ body {
     gap: 5px;
     top: 60px; /* Abstand von oben */
     left: 300px; /* Abstand von links */
-    z-index: 1000; /* Damit es über der Karte angezeigt wird */
+    z-index: 4000; /* Damit es über der Karte angezeigt wird */
     padding: 10px; /* Optional: Abstand */
     border-radius: 5px; /* Optional: Abgerundete Ecken */
 }

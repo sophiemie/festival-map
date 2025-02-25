@@ -2,17 +2,22 @@ import axios from "axios";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import path from "path";
+import fs from "fs";
 
-// __dirname in ES-Modulen definieren
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Prüfe, ob die App im Docker läuft
+const isDocker = process.env.DOCKER_ENV === "true";
 
-//dotenv.config({ path: '../.env' });
+// Setze den korrekten Pfad zur .env-Datei
+const envPath = isDocker
+    ? path.resolve("/data/.env") // Docker-Pfad
+    : path.resolve(process.cwd(), "../.env"); // Lokaler Pfad
 
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+console.log("Gesuchter .env-Pfad:", envPath);
+console.log("Existiert die Datei?", fs.existsSync(envPath) ? "✅ Ja" : "❌ Nein");
+
+dotenv.config({ path: envPath });
 
 console.log(process.env.LASTFM_API_KEY);
-console.log(__dirname);
 console.log("Last.fm API Key aus .env:", process.env.LASTFM_API_KEY);
 
 const cache = {}; // Objekt als einfacher Cache

@@ -9,6 +9,8 @@ services:
       - ./backend/docs:/src/docs
     environment:
       - NODE_ENV=development
+    env_file:
+      - ./backend/.env
 
   frontend:
     build: ./frontend
