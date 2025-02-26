@@ -92,6 +92,18 @@ body {
     margin-top: 10px; /* Abstand zum Titel */
 }
 
+.location-wrapper {
+    display: flex;
+    flex-direction: column; /* Sorgt dafür, dass Ort und Distanz untereinander stehen */
+    align-items: center; /* Zentriert beides */
+}
+
+.location-wrapper {
+    display: flex;
+    flex-direction: column; /* Sorgt dafür, dass Ort und Distanz untereinander stehen */
+    align-items: center; /* Zentriert beides */
+}
+
 #festival-location {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -99,8 +111,9 @@ body {
     color: #555;
     margin: 0; /* Entfernt Standardabstand */
     line-height: 1.0;
-    display: flex;
+    display: block;
     align-items: center; /* Vertikale Zentrierung */
+    text-align: center;
 }
 
 
@@ -108,6 +121,10 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     color: #555;
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    margin: 0;
 }
 
 #festival-tickets {
@@ -516,4 +533,3 @@ body {
 #remove-marker:hover {
     color: darkred;
 }
-
