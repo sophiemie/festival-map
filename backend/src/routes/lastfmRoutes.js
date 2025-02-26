@@ -38,9 +38,14 @@ router.post("/artists/similar", async (req, res) => {
         for (const band of bands) {
             await delay(1000); // Throttle: 1 Sekunde warten
 
-            const response = await getArtistInfo(band); // ✅ Direkt die API-Funktion aufrufen
-            if (response && response.similar) {
-                similarArtists[band] = response.similar;
+            const response = await getArtistInfo(band);
+            console.log(`Antwort für ${band}:`, response); // Protokolliere die Antwort
+
+            if (response && response.similarartists && response.similarartists.artist) {
+                // Füge die ähnlichen Künstler zur Antwort hinzu
+                similarArtists[band] = response.similarartists.artist.map(artist => artist.name);
+            } else {
+                console.warn(`Keine ähnlichen Künstler für ${band} gefunden.`);
             }
         }
 
@@ -50,5 +55,6 @@ router.post("/artists/similar", async (req, res) => {
         res.status(500).json({ error: "Interner Serverfehler" });
     }
 });
+
 
 export default router;
