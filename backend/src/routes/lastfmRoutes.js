@@ -1,5 +1,8 @@
 import express from "express";
 import { fetchArtistInfo } from "../controllers/lastfmController.js";
+import { getArtistInfo } from "../services/lastfmService.js"; // Direkt den Service importieren
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const router = express.Router();
 
@@ -20,33 +23,32 @@ const router = express.Router();
  *         description: Erfolgreiche Antwort mit Künstler-Infos
  *       500:
  *         description: Fehler beim Abruf
-
+ */
 router.get("/artist/:name", fetchArtistInfo);
 
-router.post("/bands/similar", async (req, res) => {
-    const { artists } = req.body;
-
-    if (!artists || !Array.isArray(artists) || artists.length === 0) {
-        return res.status(400).json({ error: "Es muss eine Liste von Künstlern angegeben werden." });
-    }
-
+router.post("/artists/similar", async (req, res) => {
     try {
-        const results = {};
+        const { bands } = req.body; // Liste der ausgewählten Bands
+        if (!bands || !Array.isArray(bands)) {
+            return res.status(400).json({ error: "Bands müssen als Array gesendet werden." });
+        }
 
-        for (const artist of artists) {
-            try {
-                const data = await getArtistInfo(artist);
-                results[artist] = data.similarartists.artist.slice(0, 10).map(a => a.name);
-            } catch (error) {
-                results[artist] = { error: "Daten konnten nicht abgerufen werden." };
+        const similarArtists = {};
+
+        for (const band of bands) {
+            await delay(1000); // Throttle: 1 Sekunde warten
+
+            const response = await getArtistInfo(band); // ✅ Direkt die API-Funktion aufrufen
+            if (response && response.similar) {
+                similarArtists[band] = response.similar;
             }
         }
 
-        res.json(results);
+        res.json(similarArtists);
     } catch (error) {
-        console.error("Fehler beim Abrufen der ähnlichen Künstler:", error);
+        console.error("Fehler beim Abrufen ähnlicher Künstler:", error);
         res.status(500).json({ error: "Interner Serverfehler" });
     }
-}); */
+});
 
 export default router;

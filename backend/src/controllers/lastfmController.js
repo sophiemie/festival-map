@@ -1,7 +1,7 @@
 import { getArtistInfo } from "../services/lastfmService.js";
 
-const fetchArtistInfo = async (req, res) => {
-    const { name } = req.params;
+export async function fetchArtistInfo(req, res) {
+    const { name } = req.body || {};  // Falls der Name im Body ist
     if (!name) {
         return res.status(400).json({ error: "Künstlername ist erforderlich" });
     }
@@ -16,6 +16,7 @@ const fetchArtistInfo = async (req, res) => {
         console.error("Fehler im Controller:", error);
         res.status(500).json({ error: error.message });
     }
-};
+}
 
-export { fetchArtistInfo };
+
+//export { fetchArtistInfo };

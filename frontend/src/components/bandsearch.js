@@ -60,9 +60,23 @@ function displayBands(bands) {
         confirmButton.id = 'confirm-button';
         confirmButton.textContent = 'Confirm';
         confirmButton.disabled = selectedBands.length === 0; // Button-Status beim Hinzufügen
-        confirmButton.addEventListener('click', () => {
+        confirmButton.addEventListener('click', async () => {
             console.log("Ausgewählte Bands:", selectedBands);
-            alert("Du hast folgende Bands ausgewählt: " + selectedBands.join(", "));
+
+            try {
+                const response = await fetch("http://localhost:4000/artists/similar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ bands: selectedBands }),
+                });
+
+                const result = await response.json();
+                console.log("Ähnliche Künstler:", result);
+                alert("Ähnliche Künstler: " + JSON.stringify(result, null, 2));
+            } catch (error) {
+                console.error("Fehler beim Abrufen ähnlicher Künstler:", error);
+            }
+
             bandList.classList.add('hidden'); // Liste nach Bestätigung ausblenden
             bandList.style.display = 'none'; // Sicherstellen, dass sie unsichtbar ist
         });
@@ -86,7 +100,6 @@ function updateConfirmButton() {
         confirmButton.classList.remove('active'); // Klasse entfernen, wenn inaktiv
     }
 }
-
 
 // Funktion zum Filtern der Bands basierend auf dem Suchbegriff
 function filterBands(bands, searchTerm) {

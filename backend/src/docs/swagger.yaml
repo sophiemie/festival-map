@@ -20,3 +20,45 @@ paths:
           description: Erfolgreiche Antwort mit Künstler-Infos
         "500":
           description: Fehler beim Abruf
+
+  /api/artists/similar:
+    post:
+      summary: "Ähnliche Künstler abrufen"
+      description: "Nimmt eine Liste von Bands entgegen und gibt ähnliche Künstler zurück."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bands:
+                  type: array
+                  items:
+                    type: string
+                  example: ["Metallica", "Iron Maiden"]
+      responses:
+        "200":
+          description: "Liste ähnlicher Künstler"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  similarArtists:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        artist:
+                          type: string
+                          example: "Metallica"
+                        similar:
+                          type: array
+                          items:
+                            type: string
+                          example: ["Megadeth", "Slayer", "Anthrax"]
+        "400":
+          description: "Fehlerhafte Anfrage, Bands-Array fehlt oder ist leer"
+        "500":
+          description: "Interner Serverfehler"
