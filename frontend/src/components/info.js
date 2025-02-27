@@ -1,3 +1,30 @@
+async function loadSelectedBandsData() {
+    try {
+        const response = await fetch('selectedBands.json');
+        if (!response.ok) {
+            throw new Error('Fehler beim Laden der selectedBands.json');
+        }
+        const data = await response.json();
+
+        // Keys (z.B. "Alligatoah", "Antilopen Gang") sind die ausgewählten Bands
+        const selectedBands = Object.keys(data);
+
+        // Alle Values (z.B. ["Trailerpark", "Sudden", ...]) sind die ähnlichen Bands
+        const allSimilarBands = new Set();
+        Object.values(data).forEach(similarList => {
+            similarList.forEach(band => allSimilarBands.add(band));
+        });
+
+        return { selectedBands, allSimilarBands };
+    } catch (error) {
+        console.error(error);
+        return { selectedBands: [], allSimilarBands: new Set() };
+    }
+}
+
+
+
+
 // Aktualisiert die Sidebar mit Festival-Informationen
 async function updateSidebar(festival, allFestivals) {
     const { name, location, date, logo, bands, 'ticket-url': ticketUrl } = festival;
@@ -12,36 +39,39 @@ async function updateSidebar(festival, allFestivals) {
     const bandsList = document.getElementById('festival-bands');
     bandsList.innerHTML = '';
 
-    // Lade die ausgewählten Bands aus der selectedBands.json
-    let selectedBands = [];
-    try {
-        const response = await fetch('selectedBands.json');
-        if (!response.ok) {
-            throw new Error('Netzwerkantwort war nicht okay');
-        }
-        const data = await response.json();
+    // 1) Daten aus selectedBands.json laden
+    const { selectedBands, allSimilarBands } = await loadSelectedBandsData();
 
-        // Erstelle ein Array der ausgewählten Bands
-        selectedBands = Object.keys(data); // Dies ist das Array der Bands
-    } catch (error) {
-        console.error('Fehler beim Laden der ausgewählten Bands:', error);
-    }
-
-    // Füge die Bands des Festivals zur Liste hinzu
+    // 2) Bands des Festivals auflisten
     bands.forEach(band => {
         const li = document.createElement('li');
-        li.textContent = band;
         li.classList.add('clickable-band');
+        li.textContent = band;
 
-        // Füge ein Bild für die ausgewählte Band hinzu, wenn sie in der selectedBands.json ist
+        // Li-Styles, um den Stern rechts anzuzeigen
+        li.style.position = 'relative';
+        li.style.padding = '10px 40px 10px 10px'; // rechts extra Platz für den Stern
+        li.style.listStyleType = 'none';
+
+        // 3) Prüfen, ob die Band eine ausgewählte Band (Key) oder eine ähnliche Band (Value) ist
+        //    Reihenfolge: erst Gold prüfen, dann Blau
         if (selectedBands.includes(band)) {
-            const starImage = document.createElement('img');
-            starImage.src = '../../images/star_gold.png'; // Pfad zum goldenen Stern
-            starImage.alt = 'Goldener Stern';
-            starImage.classList.add('star-icon');
-            li.appendChild(starImage);
+            // Goldener Stern für ausgewählte Band
+            const starGold = document.createElement('img');
+            starGold.src = '../../images/star_gold.png';
+            starGold.alt = 'Goldener Stern';
+            starGold.classList.add('star-icon', 'gold-star');
+            li.appendChild(starGold);
+        } else if (allSimilarBands.has(band)) {
+            // Blauer Stern für ähnliche Band
+            const starBlue = document.createElement('img');
+            starBlue.src = '../../images/star_blue.png';
+            starBlue.alt = 'Blauer Stern';
+            starBlue.classList.add('star-icon', 'blue-star');
+            li.appendChild(starBlue);
         }
 
+        // Klick-Event zum Anzeigen des Popups
         li.addEventListener('click', () => {
             const relevantFestivals = allFestivals.filter(f => f.bands.includes(band));
             showPopup(band, relevantFestivals, li);
@@ -49,6 +79,8 @@ async function updateSidebar(festival, allFestivals) {
 
         bandsList.appendChild(li);
     });
+
+
 
     // Falls der Marker aktiv ist, berechne die Distanz und füge sie unter dem Ort ein
     const distanceElement = document.getElementById('festival-distance');

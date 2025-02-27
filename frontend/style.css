@@ -178,6 +178,27 @@ body {
     text-align: center; /* Zentriert den Text */
 }
 
+.clickable-band {
+    position: relative;       /* Ermöglicht absolute Positionierung innerhalb des li */
+    padding: 10px 40px 10px 10px; /* Rechts etwas mehr Platz, damit der Text nicht vom Stern überlappt wird */
+    text-align: left;         /* Oder center, falls du den Text zentrieren möchtest */
+    list-style: none;         /* Falls du die Standard-Punkte entfernen willst */
+    display: flex;            /* optional, falls du generell Flexbox-Eigenschaften nutzen willst */
+    align-items: center;      /* optional, vertikale Zentrierung (nur wenn display: flex) */
+}
+
+.star-icon {
+    position: absolute;
+    right: 10px;              /* Abstand vom rechten Rand */
+    top: 50%;                 /* Vertikal zentrieren */
+    transform: translateY(-50%); /* Vertikale Zentrierung verfeinern */
+    width: 20px !important;   /* Stern-Größe anpassen */
+    height: 20px !important;  /* Stern-Größe anpassen */
+}
+
+
+
+
 #festival-bands li:hover {
     background-color: #007BFF; /* Hover-Hintergrundfarbe */
     color: #fff; /* Textfarbe bei Hover */
@@ -533,11 +554,3 @@ body {
 #remove-marker:hover {
     color: darkred;
 }
-
-/* Ausgewählte und ähnliche Bands */
-.star-icon {
-    width: 20px !important; /* Größe anpassen */
-    height: 20px !important; /* Größe anpassen */
-    margin-left: 5px; /* Abstand zum Bandnamen */
-}
-
