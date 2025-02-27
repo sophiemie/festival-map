@@ -256,6 +256,25 @@ body {
     z-index: 2000;
 }
 
+#loading-container {
+    display: none; /* Standardmäßig versteckt */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Über allem */
+
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#loading-indicator {
+    width: 60px; /* Größe anpassen */
+    height: auto;
+}
+
+
+
 /* Ueberschreibungen von flatpickr.css */
 .flatpickr-day.inRange {
     border-radius: 0 !important; /* Keine Abrundungen in der Mitte */
