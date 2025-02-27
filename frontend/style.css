@@ -589,8 +589,10 @@ body {
 /* Button */
 .ranking-button {
     position: absolute;
-    top: 6%;
-    right: 60%;
+    top: 59px;
+    left: 550px;
+    transform: translateX(-50%);
+    display: flex;
     z-index: 1000;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
@@ -618,7 +620,7 @@ body {
 .ranking-sidebar {
     position: fixed;
     top: 15%;
-    left: 10px;
+    left: -510px; /* Versteckt die Sidebar außerhalb des Bildschirms */
     width: 500px;
     height: 70%;
     border: 2px solid #ccc;
@@ -632,12 +634,15 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.ranking-sidebar.show {
+    left: 10px; /* Verschiebt die Sidebar rein */
+}
+
 .ranking-sidebar h2 {
     font-size: 22px;
     margin-bottom: 10px;
 }
 
-/* Scrollbare Liste */
 /* Scrollbare Liste */
 .ranking-list {
     flex-grow: 1; /* Damit die Liste den verfügbaren Platz nutzt */
@@ -657,8 +662,8 @@ body {
     color: #666; /* Optional: eine dezente Farbe für bessere Lesbarkeit */
 }
 
-/* Stil für die Trennstriche */
-.ranking-list hr {
+/* Stil für die Trennstriche zwischen den Festivals */
+.ranking-list li hr {
     border: 1px solid #ccc;
     margin: 10px 0;
 }
@@ -673,8 +678,39 @@ body {
     cursor: pointer;
 }
 
-.ranking-sidebar.show {
+.sidebar-arrow {
+    position: fixed;
+    top: 50%;
     left: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1600;
+    transition: transform 0.3s ease;
 }
 
+.sidebar-arrow::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid #fff;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+}
+
+.sidebar-arrow.rotate::before {
+    border-left: 10px solid #fff;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    transform: rotate(180deg); /* Drehung des Pfeils */
+}
+
+.sidebar-arrow:hover {
+    background-color: #aaa;
+}
 

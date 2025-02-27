@@ -54,7 +54,10 @@ async function showRankingSidebar() {
     const closeButton = document.createElement('button');
     closeButton.textContent = '×';
     closeButton.classList.add('close-sidebar');
-    closeButton.addEventListener('click', () => sidebar.remove());
+    closeButton.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        arrow.classList.remove('rotate');
+    });
 
     const title = document.createElement('h2');
     title.textContent = 'Festival Ranking';
@@ -66,13 +69,16 @@ async function showRankingSidebar() {
     const rankingContainer = document.createElement('ul');
     rankingContainer.classList.add('ranking-list');
 
-    rankingList.forEach(({ festival, percentage, likedArtistsCount, mightLikeArtistsCount }) => {
+    rankingList.forEach(({
+                             festival, percentage, likedArtistsCount, mightLikeArtistsCount
+                         }, index) => {
         const item = document.createElement('li');
         item.innerHTML = `
-    <strong>${festival}</strong> - ${percentage.toFixed(1)}%<br>
-    <span>🎵 Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
-    <span>⭐ Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
-`;
+            <strong>${index + 1}. ${festival}</strong> - ${percentage.toFixed(1)}%<br>
+            <span>🎵 Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
+            <span>⭐ Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
+            <hr>
+        `;
 
         rankingContainer.appendChild(item);
     });
@@ -81,8 +87,18 @@ async function showRankingSidebar() {
     sidebar.appendChild(title);
     sidebar.appendChild(rankingContainer);
     document.body.appendChild(sidebar);
-}
 
+    // Arrow for toggling sidebar
+    const arrow = document.createElement('div');
+    arrow.id = 'sidebar-arrow';
+    arrow.classList.add('sidebar-arrow');
+    arrow.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+        arrow.classList.toggle('rotate');
+    });
+
+    document.body.appendChild(arrow);
+}
 
 function calculateFestivalRanking(festivals, selectedBands) {
     const userBands = new Set(Object.keys(selectedBands)); // Direkt ausgewählte Bands

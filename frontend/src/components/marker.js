@@ -25,6 +25,7 @@ export function haversineDistance(coord1, coord2) {
 function toggleDraggableMarker(map) {
     const rangeInput = document.getElementById('range-input');
     const removeMarkerIcon = document.getElementById('remove-marker');
+    let rankingButton = document.getElementById('ranking-button');
 
     if (!map) return console.error("Map ist nicht definiert!");
 
@@ -35,6 +36,12 @@ function toggleDraggableMarker(map) {
         window.userCircle = null;
         rangeInput.style.display = 'none';
         removeMarkerIcon.style.display = 'none';
+
+        // Verschiebe den Ranking-Button nach links, wenn der Marker entfernt wird
+        if (rankingButton) {
+            rankingButton.style.left = '450px'; // Du kannst den Wert anpassen
+        }
+
         return;
     }
 
@@ -72,6 +79,10 @@ function toggleDraggableMarker(map) {
     });
 
     calculateDistances(marker.getLatLng()); // Direkt nach Setzen des Markers berechnen
+    // Verschiebe den Ranking-Button nach rechts, wenn der Marker gesetzt wird
+    if (rankingButton) {
+        rankingButton.style.left = '550px'; // Du kannst den Wert anpassen
+    }
 }
 
 
