@@ -245,6 +245,17 @@ body {
 }
 
 
+#tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: none;
+    z-index: 2000;
+}
+
 /* Ueberschreibungen von flatpickr.css */
 .flatpickr-day.inRange {
     border-radius: 0 !important; /* Keine Abrundungen in der Mitte */

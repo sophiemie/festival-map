@@ -6,23 +6,28 @@ async function loadSelectedBandsData() {
         }
         const data = await response.json();
 
-        // Keys (z.B. "Alligatoah", "Antilopen Gang") sind die ausgewählten Bands
+        // Die Keys sind die ausgewählten Bands (z. B. "Alligatoah")
         const selectedBands = Object.keys(data);
 
-        // Alle Values (z.B. ["Trailerpark", "Sudden", ...]) sind die ähnlichen Bands
+        // Erstelle ein Set mit allen ähnlichen Bands und ein Mapping (similarMapping)
         const allSimilarBands = new Set();
-        Object.values(data).forEach(similarList => {
-            similarList.forEach(band => allSimilarBands.add(band));
+        const similarMapping = {}; // z. B. { "Trailerpark": "Alligatoah", ... }
+
+        Object.entries(data).forEach(([parentBand, similarArray]) => {
+            similarArray.forEach(similarBand => {
+                allSimilarBands.add(similarBand);
+                // Falls ein ähnliches Band in mehreren Keys auftaucht,
+                // wird hier der zuletzt gelesene Key verwendet.
+                similarMapping[similarBand] = parentBand;
+            });
         });
 
-        return { selectedBands, allSimilarBands };
+        return { selectedBands, allSimilarBands, similarMapping };
     } catch (error) {
         console.error(error);
-        return { selectedBands: [], allSimilarBands: new Set() };
+        return { selectedBands: [], allSimilarBands: new Set(), similarMapping: {} };
     }
 }
-
-
 
 
 // Aktualisiert die Sidebar mit Festival-Informationen
@@ -39,39 +44,52 @@ async function updateSidebar(festival, allFestivals) {
     const bandsList = document.getElementById('festival-bands');
     bandsList.innerHTML = '';
 
-    // 1) Daten aus selectedBands.json laden
-    const { selectedBands, allSimilarBands } = await loadSelectedBandsData();
+    // Lade die Daten aus der JSON
+    const { selectedBands, allSimilarBands, similarMapping } = await loadSelectedBandsData();
 
-    // 2) Bands des Festivals auflisten
     bands.forEach(band => {
         const li = document.createElement('li');
         li.classList.add('clickable-band');
         li.textContent = band;
-
-        // Li-Styles, um den Stern rechts anzuzeigen
         li.style.position = 'relative';
-        li.style.padding = '10px 40px 10px 10px'; // rechts extra Platz für den Stern
+        li.style.padding = '10px 40px 10px 10px'; // rechts Platz für den Stern
         li.style.listStyleType = 'none';
 
-        // 3) Prüfen, ob die Band eine ausgewählte Band (Key) oder eine ähnliche Band (Value) ist
-        //    Reihenfolge: erst Gold prüfen, dann Blau
+        // Prüfen: Ist es eine ausgewählte Band? (Goldener Stern)
         if (selectedBands.includes(band)) {
-            // Goldener Stern für ausgewählte Band
             const starGold = document.createElement('img');
             starGold.src = '../../images/star_gold.png';
             starGold.alt = 'Goldener Stern';
             starGold.classList.add('star-icon', 'gold-star');
             li.appendChild(starGold);
-        } else if (allSimilarBands.has(band)) {
-            // Blauer Stern für ähnliche Band
+        }
+        // Andernfalls prüfen: Ist es ein ähnliches Band? (Blauer Stern)
+        else if (allSimilarBands.has(band)) {
             const starBlue = document.createElement('img');
             starBlue.src = '../../images/star_blue.png';
             starBlue.alt = 'Blauer Stern';
             starBlue.classList.add('star-icon', 'blue-star');
+
+            // Tooltip-Hover hinzufügen
+            starBlue.addEventListener('mouseenter', (e) => {
+                const tooltip = document.getElementById('tooltip');
+                console.log('Tooltip Element:', tooltip);
+                tooltip.textContent = `Similar to ${similarMapping[band]}`;
+                tooltip.style.display = 'block';
+                const rect = starBlue.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - tooltip.offsetHeight - 5) + 'px';
+            });
+
+            starBlue.addEventListener('mouseleave', () => {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.display = 'none';
+            });
+
             li.appendChild(starBlue);
         }
 
-        // Klick-Event zum Anzeigen des Popups
+        // Klick-Event für das Anzeigen des Popups
         li.addEventListener('click', () => {
             const relevantFestivals = allFestivals.filter(f => f.bands.includes(band));
             showPopup(band, relevantFestivals, li);
@@ -79,7 +97,6 @@ async function updateSidebar(festival, allFestivals) {
 
         bandsList.appendChild(li);
     });
-
 
 
     // Falls der Marker aktiv ist, berechne die Distanz und füge sie unter dem Ort ein
