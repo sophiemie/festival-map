@@ -1,3 +1,5 @@
+import {displayRankingButton} from "./ranking";
+
 let selectedBands = []; // Zustand zum Speichern der ausgewählten Bands
 
 // Funktion zum Abrufen und Filtern der Bands aus der JSON
@@ -89,12 +91,8 @@ function displayBands(bands) {
             // Bandliste ausblenden
             bandList.classList.add('hidden');
             bandList.style.display = 'none';
+            displayRankingButton();
         });
-
-
-
-
-
 
         bandList.appendChild(confirmButton);
     }

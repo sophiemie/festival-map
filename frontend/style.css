@@ -584,3 +584,77 @@ body {
 #remove-marker:hover {
     color: darkred;
 }
+
+/* Ranking System */
+/* Button */
+.ranking-button {
+    position: absolute;
+    top: 6%;
+    right: 60%;
+    z-index: 1000;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 14px; /* Abgerundete Ecken */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Schatten für 3D-Effekt */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.ranking-button:hover {
+    background-color: #0056b3; /* Dunkleres Blau beim Hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Stärkerer Schatten beim Hover */
+}
+
+.ranking-button:active {
+    transform: scale(0.95); /* Leichter Klick-Effekt */
+}
+
+/* Slidebar */
+.ranking-sidebar {
+    position: fixed;
+    top: 15%;
+    left: 10px;
+    width: 300px;
+    height: 70%;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1500;
+    background-color: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(20px);
+}
+
+.ranking-sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.ranking-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ranking-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ranking-sidebar.show {
+    left: 0;
+}
