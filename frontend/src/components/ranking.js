@@ -43,7 +43,9 @@ export function displayRankingButton() {
 
 async function showRankingSidebar() {
     let existingSidebar = document.getElementById('ranking-sidebar');
-    if (existingSidebar) existingSidebar.remove();
+    if (existingSidebar) {
+        existingSidebar.remove();
+    }
 
     const sidebar = document.createElement('div');
     sidebar.id = 'ranking-sidebar';
@@ -59,14 +61,19 @@ async function showRankingSidebar() {
 
     const festivals = await fetchFestivals();
     const selectedBands = await fetchSelectedBands();
-
     const rankingList = calculateFestivalRanking(festivals, selectedBands);
 
     const rankingContainer = document.createElement('ul');
     rankingContainer.classList.add('ranking-list');
-    rankingList.forEach(({ festival, percentage }) => {
+
+    rankingList.forEach(({ festival, percentage, likedArtistsCount, mightLikeArtistsCount }) => {
         const item = document.createElement('li');
-        item.innerHTML = `<strong>${festival}</strong> - ${percentage.toFixed(1)}%`;
+        item.innerHTML = `
+    <strong>${festival}</strong> - ${percentage.toFixed(1)}%<br>
+    <span>🎵 Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
+    <span>⭐ Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
+`;
+
         rankingContainer.appendChild(item);
     });
 
@@ -76,18 +83,24 @@ async function showRankingSidebar() {
     document.body.appendChild(sidebar);
 }
 
+
 function calculateFestivalRanking(festivals, selectedBands) {
-    const userBands = new Set(Object.keys(selectedBands)); // Hauptbands
+    const userBands = new Set(Object.keys(selectedBands)); // Direkt ausgewählte Bands
     const similarBands = new Set(Object.values(selectedBands).flat()); // Ähnliche Bands
     const allUserBands = new Set([...userBands, ...similarBands]);
 
     return festivals.map(festival => {
         const festivalBands = new Set(festival.bands);
-        const matchingBands = [...allUserBands].filter(band => festivalBands.has(band));
-        const percentage = festivalBands.size > 0
-            ? (matchingBands.length / festivalBands.size) * 100
-            : 0;
+        const likedArtists = [...userBands].filter(band => festivalBands.has(band)); // Übereinstimmende Hauptbands
+        const mightLikeArtists = [...similarBands].filter(band => festivalBands.has(band)); // Übereinstimmende ähnliche Bands
 
-        return { festival: festival.name, percentage };
+        const percentage = ((likedArtists.length + mightLikeArtists.length) / festivalBands.size) * 100;
+
+        return {
+            festival: festival.name,
+            percentage,
+            likedArtistsCount: likedArtists.length,
+            mightLikeArtistsCount: mightLikeArtists.length
+        };
     }).sort((a, b) => b.percentage - a.percentage);
 }

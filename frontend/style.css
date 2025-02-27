@@ -619,14 +619,17 @@ body {
     position: fixed;
     top: 15%;
     left: 10px;
-    width: 300px;
+    width: 500px;
     height: 70%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     transition: left 0.3s ease-in-out;
     z-index: 1500;
     background-color: rgba(255, 255, 255, 0.0);
     backdrop-filter: blur(20px);
+    font-family: 'Poppins', sans-serif;
 }
 
 .ranking-sidebar h2 {
@@ -634,16 +637,23 @@ body {
     margin-bottom: 10px;
 }
 
+/* Scrollbare Liste */
 .ranking-list {
-    list-style: none;
-    padding: 0;
+    flex-grow: 1; /* Damit die Liste den verfügbaren Platz nutzt */
+    overflow-y: auto;
+    max-height: 90%; /* Begrenzung auf Sidebar-Höhe */
+    padding-right: 10px; /* Platz für die Scrollbar */
 }
 
 .ranking-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    font-size: 18px;
+    font-size: 20px; /* Standardgröße für den Festivalnamen */
 }
+
+.ranking-list li span {
+    font-size: 16px; /* Kleinere Schriftgröße für die Zusatzinfos */
+    color: #666; /* Optional: eine dezente Farbe für bessere Lesbarkeit */
+}
+
 
 .close-sidebar {
     position: absolute;
@@ -658,3 +668,5 @@ body {
 .ranking-sidebar.show {
     left: 0;
 }
+
+
