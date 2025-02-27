@@ -638,15 +638,18 @@ body {
 }
 
 /* Scrollbare Liste */
+/* Scrollbare Liste */
 .ranking-list {
     flex-grow: 1; /* Damit die Liste den verfügbaren Platz nutzt */
     overflow-y: auto;
     max-height: 90%; /* Begrenzung auf Sidebar-Höhe */
     padding-right: 10px; /* Platz für die Scrollbar */
+    list-style: none; /* Entfernt die Standardaufzählung */
 }
 
 .ranking-list li {
     font-size: 20px; /* Standardgröße für den Festivalnamen */
+    padding-bottom: 10px; /* Abstand nach unten für Trennstrich */
 }
 
 .ranking-list li span {
@@ -654,6 +657,11 @@ body {
     color: #666; /* Optional: eine dezente Farbe für bessere Lesbarkeit */
 }
 
+/* Stil für die Trennstriche */
+.ranking-list hr {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
 
 .close-sidebar {
     position: absolute;

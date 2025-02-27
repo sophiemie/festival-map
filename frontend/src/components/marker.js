@@ -1,6 +1,6 @@
 import festivals from '../../festivals2025.json'; // Stelle sicher, dass der Pfad korrekt ist
 
-function haversineDistance(coord1, coord2) {
+export function haversineDistance(coord1, coord2) {
     const toRad = (x) => (Number(x) * Math.PI) / 180; // Sicherstellen, dass es eine Zahl ist
 
     const lat1 = toRad(coord1.latitude);
