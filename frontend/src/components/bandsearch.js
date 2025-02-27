@@ -64,7 +64,7 @@ function displayBands(bands) {
             console.log("Ausgewählte Bands:", selectedBands);
 
             try {
-                const response = await fetch("http://localhost:4000/artists/similar", {
+                const response = await fetch("http://localhost:4000/api/artists/similar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ bands: selectedBands }),
