@@ -533,3 +533,11 @@ body {
 #remove-marker:hover {
     color: darkred;
 }
+
+/* Ausgewählte und ähnliche Bands */
+.star-icon {
+    width: 20px !important; /* Größe anpassen */
+    height: 20px !important; /* Größe anpassen */
+    margin-left: 5px; /* Abstand zum Bandnamen */
+}
+

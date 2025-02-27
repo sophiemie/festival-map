@@ -1,5 +1,5 @@
 // Aktualisiert die Sidebar mit Festival-Informationen
-function updateSidebar(festival, allFestivals) {
+async function updateSidebar(festival, allFestivals) {
     const { name, location, date, logo, bands, 'ticket-url': ticketUrl } = festival;
 
     document.getElementById('festival-name').textContent = name;
@@ -11,10 +11,36 @@ function updateSidebar(festival, allFestivals) {
 
     const bandsList = document.getElementById('festival-bands');
     bandsList.innerHTML = '';
+
+    // Lade die ausgewählten Bands aus der selectedBands.json
+    let selectedBands = [];
+    try {
+        const response = await fetch('selectedBands.json');
+        if (!response.ok) {
+            throw new Error('Netzwerkantwort war nicht okay');
+        }
+        const data = await response.json();
+
+        // Erstelle ein Array der ausgewählten Bands
+        selectedBands = Object.keys(data); // Dies ist das Array der Bands
+    } catch (error) {
+        console.error('Fehler beim Laden der ausgewählten Bands:', error);
+    }
+
+    // Füge die Bands des Festivals zur Liste hinzu
     bands.forEach(band => {
         const li = document.createElement('li');
         li.textContent = band;
         li.classList.add('clickable-band');
+
+        // Füge ein Bild für die ausgewählte Band hinzu, wenn sie in der selectedBands.json ist
+        if (selectedBands.includes(band)) {
+            const starImage = document.createElement('img');
+            starImage.src = '../../images/star_gold.png'; // Pfad zum goldenen Stern
+            starImage.alt = 'Goldener Stern';
+            starImage.classList.add('star-icon');
+            li.appendChild(starImage);
+        }
 
         li.addEventListener('click', () => {
             const relevantFestivals = allFestivals.filter(f => f.bands.includes(band));
@@ -44,6 +70,7 @@ function updateSidebar(festival, allFestivals) {
         document.getElementById('festival-sidebar').style.display = 'none';
     });
 }
+
 
 
 // Kalender für jedes Festival
