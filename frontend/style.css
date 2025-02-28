@@ -713,3 +713,8 @@ body {
     background-color: #aaa;
 }
 
+.festival-outside-radius {
+    color: gray; /* Grau für Festivals außerhalb des Radius */
+    opacity: 0.5; /* Optional: ein bisschen Transparenz hinzufügen */
+}
+

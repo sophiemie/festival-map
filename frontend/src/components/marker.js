@@ -121,8 +121,4 @@ function updateSidebar(distances) {
     });
 }
 
-
-
-
-
 export { toggleDraggableMarker };
