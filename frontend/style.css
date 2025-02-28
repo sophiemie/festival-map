@@ -263,7 +263,6 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000; /* Über allem */
-
     padding: 20px;
     border-radius: 10px;
 }
