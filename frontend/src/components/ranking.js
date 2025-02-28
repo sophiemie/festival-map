@@ -112,19 +112,15 @@ async function showRankingSidebar() {
 }
 
 
+
 function calculateFestivalRanking(festivals, selectedBands) {
     const userBands = new Set(Object.keys(selectedBands));
     const similarBands = new Set(Object.values(selectedBands).flat());
     const allUserBands = new Set([...userBands, ...similarBands]);
 
-    // Sicherstellen, dass userMarker existiert, bevor auf getLatLng() zugegriffen wird
-    const userPosition = (window.userMarker && typeof window.userMarker.getLatLng === "function")
-        ? window.userMarker.getLatLng()
-        : null;
-
-    // Hole den Wert aus dem Range-Input (Radius)
+    const userPosition = window.userMarker ? window.userMarker.getLatLng() : null;
     const rangeInput = document.getElementById('range-input');
-    const radius = rangeInput ? parseInt(rangeInput.value) : 0; // Den Radius aus dem Input lesen
+    const radius = parseFloat(rangeInput.value); // Hole den Wert des Range-Inputs (Radius)
 
     return festivals.map(festival => {
         const festivalBands = new Set(festival.bands);
@@ -133,11 +129,9 @@ function calculateFestivalRanking(festivals, selectedBands) {
 
         const percentage = ((likedArtists.length + mightLikeArtists.length) / festivalBands.size) * 100;
 
-        // Berechne die Distanz nur, wenn der Marker gesetzt ist
         let distanceText = 'N/A';
-        let distance = 0;
-        let isOutsideRadius = false; // Variable um zu prüfen, ob das Festival außerhalb des Radius liegt
-
+        let distance = null;
+        let isOutsideRadius = false;
         if (userPosition) {
             distance = haversineDistance({
                 latitude: userPosition.lat,
@@ -147,24 +141,13 @@ function calculateFestivalRanking(festivals, selectedBands) {
                 longitude: festival.location.longitude
             });
 
-            // Falls die Distanz größer als der Radius ist, setzen wir isOutsideRadius auf true
-            if (distance <= radius) {
-                distanceText = distance.toFixed(1) + ' km';
-            } else {
-                distanceText = distance.toFixed(1) + ' km'; // Auch außerhalb anzeigen
+            // Berechne die Distanz
+            distanceText = distance.toFixed(1) + ' km';
+
+            // Überprüfe, ob das Festival außerhalb des Radius liegt
+            if (distance > radius) {
                 isOutsideRadius = true;
             }
-        }
-
-        // Berechne ein Ranking für jedes Festival basierend auf den Übereinstimmungen und der Distanz
-        let rankingScore = percentage; // Beginne mit der Prozentzahl der Übereinstimmungen
-
-        if (distance <= radius) {
-            // Festivals im Radius erhalten eine höhere Gewichtung für die Nähe
-            rankingScore += (100 - distance);  // Entfernung zum Ranking hinzufügen (höhere Entfernung = kleinerer Wert)
-        } else {
-            // Festivals außerhalb des Radius erhalten einen zusätzlichen Abzug (z.B. -50 Punkte)
-            rankingScore -= 50;
         }
 
         return {
@@ -173,10 +156,27 @@ function calculateFestivalRanking(festivals, selectedBands) {
             likedArtistsCount: likedArtists.length,
             mightLikeArtistsCount: mightLikeArtists.length,
             distance: distanceText,
-            rankingScore,
-            isOutsideRadius // Hinzufügen der Information, ob das Festival außerhalb des Radius liegt
+            isOutsideRadius
         };
     })
-        .sort((a, b) => b.rankingScore - a.rankingScore); // Sortierung nach dem berechneten Ranking-Score
+        .sort((a, b) => {
+            // Festivals im Radius kommen immer zuerst, auch wenn sie weniger Übereinstimmungen haben
+            if (!a.isOutsideRadius && b.isOutsideRadius) {
+                return -1; // a (im Radius) kommt vor b (außerhalb des Radius)
+            }
+            if (a.isOutsideRadius && !b.isOutsideRadius) {
+                return 1; // b (im Radius) kommt vor a (außerhalb des Radius)
+            }
+
+            // Zuerst nach Übereinstimmungen sortieren (gelikte und ähnliche Bands)
+            const bandMatchDifference = (b.likedArtistsCount + b.mightLikeArtistsCount) - (a.likedArtistsCount + a.mightLikeArtistsCount);
+
+            // Wenn die Übereinstimmungen gleich sind, dann nach Distanz sortieren (innerhalb des Radius)
+            if (bandMatchDifference === 0) {
+                return a.distance - b.distance;
+            }
+
+            return bandMatchDifference;
+        });
 }
 
