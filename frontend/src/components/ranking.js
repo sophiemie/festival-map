@@ -1,4 +1,5 @@
 import { haversineDistance } from './marker.js';
+import { updateSidebar } from './info.js'; // Passe den Pfad an, je nach Dateistruktur
 
 
 async function fetchFestivals() {
@@ -83,16 +84,27 @@ async function showRankingSidebar() {
             item.classList.add('festival-outside-radius');
         }
 
+        // Festivalname als klickbaren Link
         item.innerHTML = `
-    <strong>${index + 1}. ${festival}</strong> - ${percentage.toFixed(1)}%<br>
-    <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
-    <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
-    ${distanceText}
-    <hr>
-`;
+        <strong><a href="javascript:void(0);" class="festival-link" data-festival="${festival}">${index + 1}. ${festival}</a></strong> - ${percentage.toFixed(1)}%<br>
+        <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
+        <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
+        ${distanceText}
+        <hr>
+    `;
+
+        // Event-Listener für den Klick auf den Festivalnamen
+        const festivalLink = item.querySelector('.festival-link');
+        festivalLink.addEventListener('click', async () => {
+            // Holen das Festival aus der Festivalliste
+            const selectedFestival = festivals.find(f => f.name === festival);
+            if (selectedFestival) {
+                // Sidebar mit den Festival-Details aktualisieren
+                await updateSidebar(selectedFestival, festivals);
+            }
+        });
 
         rankingContainer.appendChild(item);
-
     });
 
     sidebar.appendChild(closeButton);
