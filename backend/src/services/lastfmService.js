@@ -2,6 +2,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
+import https from "https"; // Importieren des https-Moduls
 
 // Prüfe, ob die App im Docker läuft
 const isDocker = process.env.DOCKER_ENV === "true";
@@ -15,6 +16,11 @@ dotenv.config({ path: envPath });
 
 const cache = {}; // Objekt als einfacher Cache
 
+// Axios-Instanz mit einer benutzerdefinierten https-Agent-Konfiguration
+const agent = new https.Agent({
+    family: 4, // Erzwingt IPv4
+});
+
 const getArtistInfo = async (artistName, autocorrect = 1) => {
     if (cache[artistName]) {
         console.log(`Cache-Hit für ${artistName}`);
@@ -27,7 +33,8 @@ const getArtistInfo = async (artistName, autocorrect = 1) => {
 
         console.log(`Request an Last.fm: ${url}`);
 
-        const response = await axios.get(url);
+        // Verwende die Axios-Instanz mit dem benutzerdefinierten Agent
+        const response = await axios.get(url, { httpsAgent: agent });
         console.log("Antwort von Last.fm:", response.data); // Überprüfe die erhaltenen Daten
 
         // Hier speichern wir die Response in einer Textdatei
