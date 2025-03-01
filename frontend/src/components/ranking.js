@@ -52,7 +52,7 @@ async function showRankingSidebar() {
 
     const sidebar = document.createElement('div');
     sidebar.id = 'ranking-sidebar';
-    sidebar.classList.add('ranking-sidebar');
+    sidebar.classList.add('ranking-sidebar', 'show');
 
     const closeButton = document.createElement('button');
     closeButton.textContent = '×';
@@ -84,14 +84,15 @@ async function showRankingSidebar() {
         }
 
         item.innerHTML = `
-            <strong>${index + 1}. ${festival}</strong> - ${percentage.toFixed(1)}%<br>
-            <span>🎵 Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
-            <span>⭐ Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
-            ${distanceText}
-            <hr>
-        `;
+    <strong>${index + 1}. ${festival}</strong> - ${percentage.toFixed(1)}%<br>
+    <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
+    <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
+    ${distanceText}
+    <hr>
+`;
 
         rankingContainer.appendChild(item);
+
     });
 
     sidebar.appendChild(closeButton);
@@ -102,7 +103,7 @@ async function showRankingSidebar() {
     // Arrow for toggling sidebar
     const arrow = document.createElement('div');
     arrow.id = 'sidebar-arrow';
-    arrow.classList.add('sidebar-arrow');
+    arrow.classList.add('sidebar-arrow', 'rotate');
     arrow.addEventListener('click', () => {
         sidebar.classList.toggle('show');
         arrow.classList.toggle('rotate');

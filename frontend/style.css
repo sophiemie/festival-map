@@ -619,7 +619,7 @@ body {
 .ranking-sidebar {
     position: fixed;
     top: 15%;
-    left: -510px; /* Versteckt die Sidebar außerhalb des Bildschirms */
+    left: -550px; /* Versteckt die Sidebar außerhalb des Bildschirms */
     width: 500px;
     height: 70%;
     border: 2px solid #ccc;
@@ -716,5 +716,12 @@ body {
 .festival-outside-radius {
     color: gray; /* Grau für Festivals außerhalb des Radius */
     opacity: 0.5; /* Optional: ein bisschen Transparenz hinzufügen */
+}
+
+.star {
+    width: 16px;  /* Größe anpassen */
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
 }
 
