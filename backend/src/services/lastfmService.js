@@ -12,6 +12,26 @@ const envPath = isDocker
     ? path.resolve("/data/.env") // Docker-Pfad
     : path.resolve(process.cwd(), "../.env"); // Lokaler Pfad
 
+
+// Überprüfen, ob die .env-Datei existiert
+if (!fs.existsSync(envPath)) {
+    // Wenn keine .env-Datei existiert, erstellen wir sie mit einem leeren API-Key
+    const defaultEnvContent = 'LASTFM_API_KEY=\n';
+    fs.writeFileSync(envPath, defaultEnvContent, 'utf8');
+
+    // Eine Nachricht in der Konsole ausgeben, wie der Prof einen API-Key erstellen kann
+    console.log("Die .env-Datei wurde erstellt. Um fortzufahren, generieren Sie bitte einen eigenen API-Key von Last.fm:");
+    console.log("1. Gehen Sie zu https://www.last.fm/api.");
+    console.log("2. Melden Sie sich an oder erstellen Sie ein Konto.");
+    console.log("3. Erstellen Sie eine API-Anwendung und erhalten Sie Ihren API-Key.");
+    console.log("4. Tragen Sie den API-Key in die .env-Datei unter 'LASTFM_API_KEY=IHR_API_KEY' ein.");
+    console.log("5. Starten Sie das Projekt erneut.");
+
+    process.exit(); // Stoppt das Programm, da der API-Key fehlt
+}
+
+
+// Wenn .env Datei existiert
 dotenv.config({ path: envPath });
 
 const cache = {}; // Objekt als einfacher Cache
