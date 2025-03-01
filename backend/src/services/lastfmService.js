@@ -57,19 +57,17 @@ const getArtistInfo = async (artistName, autocorrect = 1) => {
         const response = await axios.get(url, { httpsAgent: agent });
         console.log("Antwort von Last.fm:", response.data); // Überprüfe die erhaltenen Daten
 
-        // Hier speichern wir die Response in einer Textdatei
-        const filePath = path.join(process.cwd(), "/../../frontend/selectedBands.json"); // Pfad zur Textdatei
-        fs.writeFileSync(filePath, JSON.stringify(response.data, null, 2)); // Schreibe die Response in die Textdatei
-
+        // Extrahiere nur die Künstlernamen
         const similarArtists = response.data.similarartists.artist.map(artist => artist.name);
         console.log("Ähnliche Künstler:", similarArtists);
 
-        cache[artistName] = response.data; // Speichert das Ergebnis im Cache
-        return response.data;
+        cache[artistName] = similarArtists; // Nur die Künstlernamen speichern
+        return similarArtists;
     } catch (error) {
         console.error("Fehler beim Abruf von Last.fm:", error.response?.data || error.message);
         throw new Error(`Fehler beim Abruf der Daten: ${error.response?.status} - ${error.response?.data?.message || error.message}`);
     }
 };
+
 
 export { getArtistInfo };

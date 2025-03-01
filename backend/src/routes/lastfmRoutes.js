@@ -7,7 +7,18 @@ import { getArtistInfo } from "../services/lastfmService.js";
 const router = express.Router();
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const filePath = path.join(process.cwd(), "/../../frontend/selectedBands.json");
+const isDocker = process.env.DOCKER_ENV === 'true';  // Setze diese Variable, wenn du im Docker-Container bist
+
+let filePath;
+if (isDocker) {
+    filePath = path.join(process.cwd(), "/app/shared/selectedBands.json"); // Docker
+} else {
+    filePath = path.join(process.cwd(), "/../../frontend/selectedBands.json"); // Lokal
+}
+
+console.log('Dateipfad:', filePath);
+
+
 
 router.get("/artist/:name", fetchArtistInfo);
 
@@ -22,19 +33,12 @@ router.post("/artists/similar", async (req, res) => {
 
         for (const band of bands) {
             await delay(1000);
-
-            const response = await getArtistInfo(band);
-            console.log(`Antwort für ${band}:`, response);
-
-            if (response && response.similarartists && response.similarartists.artist) {
-                similarArtists[band] = response.similarartists.artist.map(artist => artist.name);
-            } else {
-                console.warn(`Keine ähnlichen Künstler für ${band} gefunden.`);
-            }
+            const response = await getArtistInfo(band); // Holt NUR die Namen, nicht das gesamte JSON
+            similarArtists[band] = response;
         }
 
-        // **JSON-Datei komplett überschreiben**
-        fs.writeFileSync(filePath, JSON.stringify(similarArtists, null, 2), "utf8");
+        // Datei speichern
+        fs.writeFileSync("/app/shared/selectedBands.json", JSON.stringify(similarArtists, null, 2), "utf8");
 
         console.log("Gespeicherte Daten:", JSON.stringify(similarArtists, null, 2));
         res.json(similarArtists);
@@ -43,5 +47,6 @@ router.post("/artists/similar", async (req, res) => {
         res.status(500).json({ error: "Interner Serverfehler" });
     }
 });
+
 
 export default router;

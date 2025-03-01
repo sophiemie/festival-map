@@ -1,6 +1,13 @@
 async function loadSelectedBandsData() {
     try {
-        const response = await fetch('selectedBands.json');
+        const isDocker = window.location.hostname === 'localhost';
+        const url = isDocker
+            ? 'http://localhost:4000/app/shared/selectedBands.json'
+            : 'selectedBands.json';
+
+        const response = await fetch(url);
+
+
         if (!response.ok) {
             throw new Error('Fehler beim Laden der selectedBands.json');
         }

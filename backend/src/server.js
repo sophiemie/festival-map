@@ -17,6 +17,9 @@ app.use(cors()); // CORS für alle Anfragen aktivieren
 
 app.use(express.json()); // JSON-Parsing aktivieren
 
+// Statische Datei-Freigabe für das gemeinsame Volume
+app.use('/app/shared', express.static('/app/shared'));
+
 
 // __dirname in ES-Modulen definieren
 const __filename = fileURLToPath(import.meta.url);
