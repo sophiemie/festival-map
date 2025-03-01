@@ -1118,9 +1118,9 @@
         "name": "Hive",
         "date": "2025-06-20 to 2025-06-22",
         "logo": "images/hive.png",
-        "ticket-url": "Ferropolis",
+        "ticket-url": "https://hive-festival.de/tickets/",
         "location": {
-            "name": "",
+            "name": "Ferropolis",
             "latitude": 51.757,
             "longitude": 12.43
         },
