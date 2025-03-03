@@ -1,22 +1,29 @@
+import fs from "fs";
 import { getArtistInfo } from "../services/lastfmService.js";
 
-export async function fetchArtistInfo(req, res) {
-    const { name } = req.body || {};  // Falls der Name im Body ist
-    if (!name) {
-        return res.status(400).json({ error: "Künstlername ist erforderlich" });
-    }
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+export const getSimilarArtists = async (req, res) => {
     try {
-        const artistInfo = await getArtistInfo(name);
-        if (!artistInfo) {
-            return res.status(404).json({ error: "Künstler nicht gefunden" });
+        const { bands } = req.body;
+        if (!bands || !Array.isArray(bands)) {
+            return res.status(400).json({ error: "Bands müssen als Array gesendet werden." });
         }
-        res.status(200).json(artistInfo);
+
+        const similarArtists = {};
+
+        for (const band of bands) {
+            await delay(1000);
+            const response = await getArtistInfo(band);
+            similarArtists[band] = response;
+        }
+
+        fs.writeFileSync("/app/shared/selectedBands.json", JSON.stringify(similarArtists, null, 2), "utf8");
+
+        console.log("Gespeicherte Daten:", JSON.stringify(similarArtists, null, 2));
+        res.json(similarArtists);
     } catch (error) {
-        console.error("Fehler im Controller:", error);
-        res.status(500).json({ error: error.message });
+        console.error("Fehler beim Abrufen ähnlicher Künstler:", error);
+        res.status(500).json({ error: "Interner Serverfehler" });
     }
-}
-
-
-//export { fetchArtistInfo };
+};
