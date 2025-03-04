@@ -98,8 +98,8 @@ async function showRankingSidebar() {
         // Festivalname als klickbaren Link
         item.innerHTML = `
         <strong><a href="javascript:void(0);" class="festival-link" data-festival="${festival}">${index + 1}. ${festival}</a></strong> - ${percentage.toFixed(1)}%<br>
-        <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Number of artists you like: <strong>${likedArtistsCount}</strong></span><br>
-        <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Number of artists you might like: <strong>${mightLikeArtistsCount}</strong></span>
+        <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Selected Artists: <strong>${likedArtistsCount}</strong></span><br>
+        <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Similar Artists: <strong>${mightLikeArtistsCount}</strong></span>
         ${distanceText}
         <hr>
     `;

@@ -413,11 +413,13 @@ body {
     font-weight: 600;
     text-align: center;
     color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6), /* Dunklerer Schatten für Kontrast */
+    0 0 10px rgba(255, 255, 255, 0.5),
     0 0 20px rgba(200, 200, 200, 0.4),
     0 0 30px rgba(150, 150, 150, 0.3);
     z-index: 100; /* Höher als die Karte */
 }
+
 
 @keyframes galaxy-border {
     0% { border-color: #ff66cc; box-shadow: 0 0 10px #ff66cc; }
@@ -481,6 +483,7 @@ body {
     width: 30px;
     height: 30px;
     transition: transform 0.2s ease-in-out;
+    z-index: 4000;
 }
 
 #marker-button:hover {
@@ -641,12 +644,11 @@ body {
     position: fixed;
     top: 15%;
     left: -550px; /* Versteckt die Sidebar außerhalb des Bildschirms */
-    width: 500px;
+    width: 320px;
     height: 70%;
     border: 2px solid #ccc;
     border-radius: 10px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
     transition: left 0.3s ease-in-out;
     z-index: 1500;
     background-color: rgba(255, 255, 255, 0.0);
@@ -660,7 +662,8 @@ body {
 
 .ranking-sidebar h2 {
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    padding: 20px;
 }
 
 /* Scrollbare Liste */
