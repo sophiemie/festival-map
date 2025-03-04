@@ -9,10 +9,10 @@ function createMap()
         maxZoom: 12, // Maximales Zoomlevel (weiter rein zoomen möglich)
     }).setView([51.1657, 10.4515], 6); // Karte zentrieren
     
-    // Definiere die Grenzen für Deutschland
+    // Grenzen für Deutschland
     const bounds = [[47.2701, 5.8663], [55.0581, 15.0419]];
     
-    // Beschränke die Karte auf die Deutschland-Grenzen
+    // Beschränkung auf Deutschland-Grenzen
     map.setMaxBounds(bounds);
     
     // Füge OpenStreetMap-Tiles hinzu

@@ -413,8 +413,18 @@ body {
     font-weight: 600;
     text-align: center;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(200, 200, 200, 0.4),
+    0 0 30px rgba(150, 150, 150, 0.3);
     z-index: 100; /* Höher als die Karte */
+}
+
+@keyframes galaxy-border {
+    0% { border-color: #ff66cc; box-shadow: 0 0 10px #ff66cc; }
+    25% { border-color: #66ccff; box-shadow: 0 0 10px #66ccff; }
+    50% { border-color: #99ff99; box-shadow: 0 0 10px #99ff99; }
+    75% { border-color: #ffcc66; box-shadow: 0 0 10px #ffcc66; }
+    100% { border-color: #ff66cc; box-shadow: 0 0 10px #ff66cc; }
 }
 
 #search-container {
@@ -427,22 +437,86 @@ body {
     align-items: center;
     gap: 10px;
     max-width: 400px;
-    z-index: 100; /* Höher als die Karte */
+    z-index: 100;
 }
 
 #search-input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
-    border: 2px solid #ddd;
+    border: 3px solid #ff66cc;
     border-radius: 25px;
     outline: none;
-    transition: all 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.8); /* Heller Hintergrund, aber innerhalb */
+    color: black;
+    animation: galaxy-border 3s infinite linear;
 }
 
-#search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+#search-input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#marker {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    gap: 10px;
+    top: 67px;
+    left: 300px;
+    z-index: 4000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: galaxy-border 3s infinite linear;
+    border: 3px solid #ff66cc;
+}
+
+#marker-button {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transition: transform 0.2s ease-in-out;
+}
+
+#marker-button:hover {
+    transform: scale(1.1);
+}
+
+#marker-button img {
+    width: 100%;
+    height: auto;
+}
+
+#remove-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    cursor: pointer;
+}
+
+#remove-marker:hover {
+    color: darkred;
+}
+
+#range-input {
+    width: 50px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    outline: none;
+    background-color: white;
+    color: black;
 }
 
 /*Bandliste beim Suchfeld*/
@@ -450,7 +524,7 @@ body {
 
 #band-list {
     position: absolute;
-    top: calc(30px); /* Direkt unter dem Suchfeld */
+    top: calc(40px); /* Direkt unter dem Suchfeld */
     left: 68%;
     transform: translateX(-50%);
     max-height: 500px; /* Höhe der Box */
@@ -529,60 +603,7 @@ body {
     background-clip: padding-box;
 }
 
-/* Marker auf der Karte */
-#marker {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    gap: 5px;
-    top: 60px; /* Abstand von oben */
-    left: 300px; /* Abstand von links */
-    z-index: 4000; /* Damit es über der Karte angezeigt wird */
-    padding: 10px; /* Optional: Abstand */
-    border-radius: 5px; /* Optional: Abgerundete Ecken */
-}
 
-#range-input {
-    width: 30%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    outline: none;
-    transition: all 0.3s ease-in-out;
-    display: none;
-}
-
-#marker-button {
-    position: relative;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-}
-
-#marker-button img {
-    width: 100%;
-    height: auto;
-}
-
-#remove-marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: red;
-    font-size: 20px;
-    font-weight: bold;
-    display: none;
-    cursor: pointer;
-}
-
-#remove-marker:hover {
-    color: darkred;
-}
 
 /* Ranking System */
 /* Button */

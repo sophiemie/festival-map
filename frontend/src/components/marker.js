@@ -25,6 +25,7 @@ export function haversineDistance(coord1, coord2) {
 function toggleDraggableMarker(map) {
     const rangeInput = document.getElementById('range-input');
     const removeMarkerIcon = document.getElementById('remove-marker');
+    const markerButton = document.getElementById('marker');
     let rankingButton = document.getElementById('ranking-button');
 
     if (!map) return console.error("Map ist nicht definiert!");
@@ -41,9 +42,10 @@ function toggleDraggableMarker(map) {
         if (rankingButton) {
             rankingButton.style.left = '450px'; // Du kannst den Wert anpassen
         }
-
+        markerButton.style.padding = '8px';
         return;
-    }
+    } else  markerButton.style.padding = '4px';
+
 
     const icon = L.icon({
         iconUrl: 'images/marker.png',
