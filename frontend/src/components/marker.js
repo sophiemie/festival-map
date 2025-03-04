@@ -42,7 +42,7 @@ function toggleDraggableMarker(map) {
         if (rankingButton) {
             rankingButton.style.left = '450px'; // Du kannst den Wert anpassen
         }
-        markerButton.style.padding = '8px';
+        markerButton.style.padding = '12px';
         return;
     } else  markerButton.style.padding = '4px';
 

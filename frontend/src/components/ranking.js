@@ -119,6 +119,14 @@ async function showRankingSidebar() {
         sidebar.classList.toggle('show');
         arrow.classList.toggle('rotate');
     });
+
+
+    arrow.classList.add('rotate');
+
+    arrow.addEventListener('click', async (event) => {
+        event.stopPropagation();  // Verhindert, dass der Klick das Event an den übergeordneten Container weitergibt
+    });
+
 }
 
 
