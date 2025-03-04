@@ -651,9 +651,11 @@ body {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease-in-out;
     z-index: 1500;
-    background-color: rgba(255, 255, 255, 0.0);
+    background-color: rgba(250, 250, 250, 0.1);
     backdrop-filter: blur(20px);
     font-family: 'Poppins', sans-serif;
+    margin: 0; /* Entfernt den Standard-Margin */
+    padding: 0; /* Entfernt den Standard-Padding */
 }
 
 .ranking-sidebar.show {
@@ -670,15 +672,30 @@ body {
 .ranking-list {
     flex-grow: 1; /* Damit die Liste den verfügbaren Platz nutzt */
     overflow-y: auto;
-    max-height: 90%; /* Begrenzung auf Sidebar-Höhe */
-    padding-right: 10px; /* Platz für die Scrollbar */
+    max-height: 85%; /* Begrenzung auf Sidebar-Höhe */
+    /*padding-right: 10px;  Platz für die Scrollbar */
     list-style: none; /* Entfernt die Standardaufzählung */
+    margin: 0; /* Entfernt den Standard-Margin */
+    padding: 10px; /* Entfernt den Standard-Padding */
 }
 
 .ranking-list li {
-    font-size: 20px; /* Standardgröße für den Festivalnamen */
-    padding-bottom: 10px; /* Abstand nach unten für Trennstrich */
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* sanfter Übergang */
 }
+
+/* Hover-Effekt für den gesamten Listeneintrag */
+.ranking-list li:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Hintergrundfarbe wird beim Hover heller */
+}
+
+/* Um das Link-Verhalten des Textes zu entfernen */
+.ranking-list li strong {
+    color: inherit; /* Kein blauer Link */
+    text-decoration: none; /* Keine Unterstreichung */
+}
+
 
 .ranking-list li span {
     font-size: 16px; /* Kleinere Schriftgröße für die Zusatzinfos */
@@ -691,7 +708,7 @@ body {
     margin: 10px 0;
 }
 
-.close-sidebar {
+.close-slidebar {
     position: absolute;
     top: 10px;
     right: 10px;

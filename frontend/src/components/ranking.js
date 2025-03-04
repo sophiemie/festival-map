@@ -36,77 +36,67 @@ async function fetchSelectedBands() {
 }
 
 export function displayRankingButton() {
-    if (document.getElementById('ranking-button')) return;
+        let rankingButton = document.getElementById('ranking-button');
+        rankingButton.style.display = 'flex';
+        rankingButton.textContent = 'Start Ranking';
 
-    const rankingButton = document.createElement('button');
-    rankingButton.id = 'ranking-button';
-    rankingButton.classList.add('ranking-button');
-    rankingButton.textContent = 'Start Ranking';
+        rankingButton.addEventListener('click', async () => {
+            console.log('Ranking gestartet mit den ausgewählten Bands!');
+            await showRankingSidebar();
+        });
 
-    rankingButton.addEventListener('click', async () => {
-        console.log('Ranking gestartet mit den ausgewählten Bands!');
-        await showRankingSidebar();
-    });
-
-    const mapContainer = document.getElementById('map');
-    if (mapContainer) {
-        mapContainer.appendChild(rankingButton);
-    } else {
-        document.body.appendChild(rankingButton);
-    }
+        const mapContainer = document.getElementById('map');
+        if (mapContainer) {
+            mapContainer.appendChild(rankingButton);
+        } else {
+            document.body.appendChild(rankingButton);
+        }
 }
 
 async function showRankingSidebar() {
-    let existingSidebar = document.getElementById('ranking-sidebar');
-    if (existingSidebar) {
-        existingSidebar.remove();
-    }
+    let sidebar = document.getElementById('ranking-sidebar');
+    let closeButton = document.getElementById('close-slidebar');
+    let title = document.getElementById('sidebar-title');
+    let rankingListContainer = document.getElementById('ranking-list');
 
-    const sidebar = document.createElement('div');
-    sidebar.id = 'ranking-sidebar';
-    sidebar.classList.add('ranking-sidebar', 'show');
+    // Wenn Sidebar schon existiert, Inhalte leeren
+    rankingListContainer.innerHTML = '';
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = '×';
-    closeButton.classList.add('close-sidebar');
+    // Button Event-Listener
     closeButton.addEventListener('click', () => {
         sidebar.classList.remove('show');
         arrow.classList.remove('rotate');
     });
 
-    const title = document.createElement('h2');
     title.textContent = 'Festival Ranking';
 
     const festivals = await fetchFestivals();
     const selectedBands = await fetchSelectedBands();
     const rankingList = calculateFestivalRanking(festivals, selectedBands);
 
-    const rankingContainer = document.createElement('ul');
-    rankingContainer.classList.add('ranking-list');
-
+    // Generiere die Ranking-Liste
     rankingList.forEach(({ festival, percentage, likedArtistsCount, mightLikeArtistsCount, distance, isOutsideRadius }, index) => {
         const item = document.createElement('li');
 
         // Abstand korrekt anzeigen
-        let distanceText = distance && distance !== 'N/A' ? `<br><span>📍 Distance: <strong>${distance}</strong></span>` : '';
+        let distanceText = distance && distance !== 'N/A' ? `<br><span><img src="/../../images/pin.png" alt="music" style="width: 16px; height: 16px;"> Distance: <strong>${distance}</strong></span>` : '';
 
         // Festival außerhalb des Radius wird grau dargestellt
         if (isOutsideRadius) {
             item.classList.add('festival-outside-radius');
         }
 
-        // Festivalname als klickbaren Link
+        // Festivalname als klickbaren Block
         item.innerHTML = `
-        <strong><a href="javascript:void(0);" class="festival-link" data-festival="${festival}">${index + 1}. ${festival}</a></strong> - ${percentage.toFixed(1)}%<br>
+        <strong>${index + 1}. ${festival}</strong> - ${percentage.toFixed(1)}%<br>
         <span><img src="/../../images/star_gold.png" alt="music" style="width: 16px; height: 16px;"> Selected Artists: <strong>${likedArtistsCount}</strong></span><br>
         <span><img src="/../../images/star_blue.png" alt="star" style="width: 16px; height: 16px;"> Similar Artists: <strong>${mightLikeArtistsCount}</strong></span>
         ${distanceText}
         <hr>
     `;
 
-        // Event-Listener für den Klick auf den Festivalnamen
-        const festivalLink = item.querySelector('.festival-link');
-        festivalLink.addEventListener('click', async () => {
+        // Event-Listener für den Klick auf das Listenelement
+        item.addEventListener('click', async () => {
             // Holen das Festival aus der Festivalliste
             const selectedFestival = festivals.find(f => f.name === festival);
             if (selectedFestival) {
@@ -115,25 +105,22 @@ async function showRankingSidebar() {
             }
         });
 
-        rankingContainer.appendChild(item);
+        rankingListContainer.appendChild(item);
     });
 
-    sidebar.appendChild(closeButton);
-    sidebar.appendChild(title);
-    sidebar.appendChild(rankingContainer);
-    document.body.appendChild(sidebar);
 
-    // Arrow for toggling sidebar
-    const arrow = document.createElement('div');
-    arrow.id = 'sidebar-arrow';
-    arrow.classList.add('sidebar-arrow', 'rotate');
+    // Zeige Sidebar an
+    sidebar.classList.add('show');
+
+    // Arrow für das Umschalten der Sidebar
+    const arrow = document.getElementById('sidebar-arrow');
+    arrow.classList.add('rotate');
     arrow.addEventListener('click', () => {
         sidebar.classList.toggle('show');
         arrow.classList.toggle('rotate');
     });
-
-    document.body.appendChild(arrow);
 }
+
 
 
 
