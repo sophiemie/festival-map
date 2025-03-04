@@ -83,7 +83,7 @@ function toggleDraggableMarker(map) {
     calculateDistances(marker.getLatLng()); // Direkt nach Setzen des Markers berechnen
     // Verschiebe den Ranking-Button nach rechts, wenn der Marker gesetzt wird
     if (rankingButton) {
-        rankingButton.style.left = '550px'; // Du kannst den Wert anpassen
+        rankingButton.style.left = '520px'; // Du kannst den Wert anpassen
     }
 }
 
