@@ -30,7 +30,7 @@ function createMap()
 function addMarkers(map, festivals)
 {
     festivals.forEach(festival => {
-        const { name, location, date, logo } = festival;
+        const { location, logo } = festival;
 
         const customIcon = L.icon({
             iconUrl: logo,
