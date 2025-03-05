@@ -644,10 +644,10 @@ body {
 /* Slidebar */
 .ranking-sidebar {
     position: fixed;
-    top: 15%;
+    top: 150px;
     left: -550px; /* Versteckt die Sidebar außerhalb des Bildschirms */
     width: 320px;
-    height: 70%;
+    height: 500px;
     border: 2px solid #ccc;
     border-radius: 10px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
@@ -666,7 +666,7 @@ body {
 
 .ranking-sidebar h2 {
     font-size: 22px;
-    margin-bottom: 15px;
+    margin-bottom: 1px;
     padding: 20px;
 }
 
@@ -674,7 +674,7 @@ body {
 .ranking-list {
     flex-grow: 1; /* Damit die Liste den verfügbaren Platz nutzt */
     overflow-y: auto;
-    max-height: 85%; /* Begrenzung auf Sidebar-Höhe */
+    max-height: 370px; /* Begrenzung auf Sidebar-Höhe */
     /*padding-right: 10px;  Platz für die Scrollbar */
     list-style: none; /* Entfernt die Standardaufzählung */
     margin: 0; /* Entfernt den Standard-Margin */
