@@ -9,6 +9,7 @@ COPY /src /data/src
 
 # Abhängigkeiten kopieren und installieren
 COPY package.json /data
+COPY --chmod=0755 entrypoint.sh /data/entrypoint.sh
 
 RUN npm install
 
@@ -19,4 +20,4 @@ RUN ls -la /data/src/docs
 EXPOSE 4000
 
 # Server starten (richtiger Pfad)
-CMD ["npm", "start"]
+ENTRYPOINT ["/data/entrypoint.sh"]

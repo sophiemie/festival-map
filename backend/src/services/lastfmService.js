@@ -20,7 +20,8 @@ if (!fs.existsSync(envPath)) {
     fs.writeFileSync(envPath, defaultEnvContent, 'utf8');
 
     // Eine Nachricht in der Konsole ausgeben, wie der Prof einen API-Key erstellen kann
-    console.log("Die .env-Datei wurde erstellt. Um fortzufahren, generieren Sie bitte einen eigenen API-Key von Last.fm:");
+    console.log("Bitte kopieren Sie die /config/.env-template zu /config/.env")
+    console.log("Um fortzufahren generieren Sie bitte einen eigenen API-Key von Last.fm:")
     console.log("1. Gehen Sie zu https://www.last.fm/api.");
     console.log("2. Melden Sie sich an oder erstellen Sie ein Konto.");
     console.log("3. Erstellen Sie eine API-Anwendung und erhalten Sie Ihren API-Key.");
