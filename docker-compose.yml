@@ -7,7 +7,8 @@ services:
     volumes:
       - ./backend/src:/src
       - ./backend/docs:/src/docs
-      - shared-data:/app/shared  # Gemeinsames Volume
+      #- shared-data:/app/shared  # Gemeinsames Volume
+      - ./backend/app/shared:/app/shared  # Direktes Mapping des Ordners
     environment:
       - NODE_ENV=development
     env_file:
@@ -21,7 +22,8 @@ services:
       - backend
     volumes:
       - ./frontend:/src
-      - shared-data:/app/shared  # Gemeinsames Volume
+      #- shared-data:/app/shared  # Gemeinsames Volume
+      - ./backend/app/shared:/app/shared # Test
     environment:
       - NODE_ENV=development
 

@@ -39,6 +39,9 @@ app.listen(PORT, () => console.log(`Server läuft auf http://localhost:${PORT}`)
 
 const selectedBandsPath = path.join(__dirname, "selectedBands.json");
 
+// Statisches Verzeichnis für die JSON-Datei bereitstellen
+app.use("/app/shared", express.static(path.join(__dirname, "app", "shared")));
+
 // API-Route zum Speichern der ausgewählten Bands
 app.post("/api/save-bands", (req, res) => {
     const { bands } = req.body;

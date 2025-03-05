@@ -13,18 +13,17 @@ async function loadSelectedBandsData() {
         }
         const data = await response.json();
 
-        // Die Keys sind die ausgewählten Bands (z. B. "Alligatoah")
+        // Keys sind die ausgewählten Bands
         const selectedBands = Object.keys(data);
 
-        // Erstelle ein Set mit allen ähnlichen Bands und ein Mapping (similarMapping)
+        // Set mit allen ähnlichen Bands und Mapping
         const allSimilarBands = new Set();
-        const similarMapping = {}; // z. B. { "Trailerpark": "Alligatoah", ... }
+        const similarMapping = {};
 
         Object.entries(data).forEach(([parentBand, similarArray]) => {
             similarArray.forEach(similarBand => {
                 allSimilarBands.add(similarBand);
-                // Falls ein ähnliches Band in mehreren Keys auftaucht,
-                // wird hier der zuletzt gelesene Key verwendet.
+                // Falls Band in mehreren Keys auftaucht wird zuletzt gelesene Key verwendet
                 similarMapping[similarBand] = parentBand;
             });
         });
@@ -62,7 +61,7 @@ async function updateSidebar(festival, allFestivals) {
         li.style.padding = '10px 40px 10px 10px'; // rechts Platz für den Stern
         li.style.listStyleType = 'none';
 
-        // Prüfen: Ist es eine ausgewählte Band? (Goldener Stern)
+        // Selected Band
         if (selectedBands.includes(band)) {
             const starGold = document.createElement('img');
             starGold.src = '../../images/star_gold.png';
@@ -70,7 +69,7 @@ async function updateSidebar(festival, allFestivals) {
             starGold.classList.add('star-icon', 'gold-star');
             li.appendChild(starGold);
         }
-        // Andernfalls prüfen: Ist es ein ähnliches Band? (Blauer Stern)
+        // Similar Band
         else if (allSimilarBands.has(band)) {
             const starBlue = document.createElement('img');
             starBlue.src = '../../images/star_blue.png';
@@ -105,7 +104,6 @@ async function updateSidebar(festival, allFestivals) {
         bandsList.appendChild(li);
     });
 
-
     // Falls der Marker aktiv ist, berechne die Distanz und füge sie unter dem Ort ein
     const distanceElement = document.getElementById('festival-distance');
     if (window.userMarker) {
@@ -121,13 +119,10 @@ async function updateSidebar(festival, allFestivals) {
     initializeCalendar(date);
 
     document.getElementById('festival-sidebar').style.display = 'block';
-
     document.getElementById('close-sidebar').addEventListener('click', () => {
         document.getElementById('festival-sidebar').style.display = 'none';
     });
 }
-
-
 
 // Kalender für jedes Festival
 function initializeCalendar(date) {
@@ -162,10 +157,11 @@ function initializeCalendar(date) {
                 const selectedDayStr = selectedDay.toISOString().split('T')[0]; // Formatiertes Datum
                 const dayElement = document.querySelector(`[data-date="${selectedDayStr}"]`);
                 if (dayElement) {
-                    dayElement.classList.add('selected-day');  // CSS-Klasse hinzufügen
+                    dayElement.classList.add('selected-day');
                 }
             });
         },
+
         // Verhindert das Wechseln des Monats und Jahres
         showMonths: 1,
         disableMobile: true,
@@ -204,8 +200,7 @@ function showPopup(bandName, festivals, targetElement) {
         popupFestivals.appendChild(festivalItem);
     });
 
-    // Mache das Popup kurz sichtbar, um Breite und Höhe zu berechnen
-    // Dies war notwendig, da erstes Popup falsche Position hatte
+    // Berechnung der Popup-Position
     popup.style.display = 'block';
     popup.classList.remove('hidden');
 
@@ -215,7 +210,6 @@ function showPopup(bandName, festivals, targetElement) {
     popup.style.top = `${rect.top}px`;
 
     // Positionierung relativ zum Marker-Element
-    let left = rect.left;
     let top = rect.bottom;
 
     // Überprüfen, ob das Popup außerhalb des Viewports liegt
@@ -231,8 +225,6 @@ function showPopup(bandName, festivals, targetElement) {
     if (top < 0) {
         top = 10; // 10px Abstand zum oberen Rand
     }
-
-    // Setze die berechnete Position
     popup.style.top = `${top}px`;
 }
 
@@ -243,7 +235,5 @@ function closePopup() {
         popup.style.display = 'none'; // Alternativ: Display auf none setzen
     }
 }
-
-
 
 export { updateSidebar, showPopup, closePopup };

@@ -26,7 +26,6 @@ function createMap()
     return map;
 }
 
-
 function addMarkers(map, festivals)
 {
     festivals.forEach(festival => {
@@ -46,6 +45,5 @@ function addMarkers(map, festivals)
         });
     });
 }
-
 
 export{ createMap, addMarkers };

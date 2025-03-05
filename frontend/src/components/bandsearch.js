@@ -67,7 +67,7 @@ function displayBands(bands) {
         confirmButton.addEventListener('click', async () => {
             console.log("Ausgewählte Bands:", selectedBands);
 
-            // Ladeindikator anzeigen
+            // Ladebalken
             const loadingContainer = document.getElementById('loading-container');
             loadingContainer.style.display = 'block';
 
@@ -80,12 +80,11 @@ function displayBands(bands) {
 
                 const result = await response.json();
                 console.log("Ähnliche Künstler:", result);
-                //alert("Ähnliche Künstler: " + JSON.stringify(result, null, 2));
             } catch (error) {
                 console.error("Fehler beim Abrufen ähnlicher Künstler:", error);
             }
 
-            // Ladeindikator wieder ausblenden
+            // Ladebalken ausschalten
             loadingContainer.style.display = 'none';
 
             // Bandliste ausblenden
@@ -106,20 +105,20 @@ function displayBands(bands) {
 function updateConfirmButton() {
     const confirmButton = document.getElementById('confirm-button');
     const isActive = selectedBands.length > 0; // Button aktiv, wenn Bands ausgewählt sind
-    confirmButton.disabled = !isActive; // Button aktivieren/deaktivieren
+    confirmButton.disabled = !isActive;
+
     if (isActive) {
-        confirmButton.classList.add('active'); // Klasse hinzufügen, wenn aktiv
+        confirmButton.classList.add('active');
     } else {
-        confirmButton.classList.remove('active'); // Klasse entfernen, wenn inaktiv
+        confirmButton.classList.remove('active');
     }
 }
 
-// Funktion zum Filtern der Bands basierend auf dem Suchbegriff
+// Band in Searchbar filtern
 function filterBands(bands, searchTerm) {
     return bands.filter(band => band.toLowerCase().includes(searchTerm.toLowerCase()));
 }
 
-// Event-Listener für das Suchfeld
 let allBands = []; // Array zum Speichern aller Bands
 
 document.getElementById("search-input").addEventListener("focus", async () => {
@@ -140,7 +139,7 @@ document.addEventListener('click', (event) => {
 
     if (!searchInput.contains(event.target) && !bandList.contains(event.target)) {
         bandList.classList.add('hidden'); // Liste ausblenden
-        bandList.style.display = 'none'; // Sicherstellen, dass sie unsichtbar ist
+        bandList.style.display = 'none';
     }
 });
 
