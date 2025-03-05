@@ -7,10 +7,11 @@ services:
     volumes:
       - ./backend/src:/src
       - ./backend/docs:/src/docs
-      #- shared-data:/app/shared  # Gemeinsames Volume
       - ./backend/app/shared:/app/shared  # Direktes Mapping des Ordners
+      - ./backend/.env:/data/.env  # Hier wird das Volume für die .env-Datei hinzugefügt
     environment:
       - NODE_ENV=development
+      - DOCKER_ENV=true # Stelle sicher, dass Docker die Umgebung kennt
     env_file:
       - ./backend/.env
 
@@ -22,7 +23,6 @@ services:
       - backend
     volumes:
       - ./frontend:/src
-      #- shared-data:/app/shared  # Gemeinsames Volume
       - ./backend/app/shared:/app/shared # Test
     environment:
       - NODE_ENV=development
