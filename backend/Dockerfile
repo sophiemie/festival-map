@@ -9,7 +9,8 @@ COPY /src /data/src
 
 # Abhängigkeiten kopieren und installieren
 COPY package.json /data
-COPY --chmod=0755 entry.sh /data/entry.sh
+COPY entry.sh /data/entry.sh
+RUN chmod +x /data/entry.sh
 
 RUN npm install
 
@@ -20,4 +21,5 @@ RUN ls -la /data/src/docs
 EXPOSE 4000
 
 # Server starten (richtiger Pfad)
-ENTRYPOINT ["/data/entry.sh"]
+ENTRYPOINT ["bash"]
+CMD ["entry.sh"]
