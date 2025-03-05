@@ -9,7 +9,7 @@ COPY /src /data/src
 
 # Abhängigkeiten kopieren und installieren
 COPY package.json /data
-COPY --chmod=0755 entry.sh /data/entrypoint.sh
+COPY --chmod=0755 entry.sh /data/entry.sh
 
 RUN npm install
 
