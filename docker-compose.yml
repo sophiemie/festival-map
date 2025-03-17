@@ -21,6 +21,3 @@ services:
       - ./backend/app/shared:/app/shared # Test
     environment:
       - NODE_ENV=development
-
-volumes:
-  shared-data:

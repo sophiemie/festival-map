@@ -498,7 +498,7 @@
             "Kobosil",
             "Lilly Palmer",
             "Prada2000",
-            "Angerist",
+            "Angerfist",
             "Barber",
             "Coone",
             "Dimitri K",
@@ -930,15 +930,44 @@
     },
     "bands": [
         "$oho Bani",
+        "Anycia",
         "Apsilon",
+        "Badchieff",
         "Badmómzjay",
+        "BHZ",
+        "BigXthaPlug",
         "Boondawg",
+        "Daimajin",
+        "Doechii",
+        "Domiziana",
+        "FERG",
+        "Filow",
+        "Haaland936",
+        "Hardrock",
         "Jassin",
         "K.I.Z",
+        "KC Rebell & Summer Cem",
+        "Ken Carson",
+        "Key Glock",
+        "LAILA!",
+        "LAZER DIM 700",
         "Lelosa",
         "Makko",
+        "Mucco",
+        "NEMZZZ",
+        "Nettspend",
+        "OsamaSon",
+        "Sadboi",
+        "SahBabii",
+        "Samara Cyn",
+        "Sampagne",
+        "ScHoolboy Q",
         "Ski Aggu",
-        "UFO361"
+        "UFO361",
+        "Yc",
+        "Yeat",
+        "Young Thug",
+        "Zsá Zsá"
     ]
     },
     {
@@ -1419,6 +1448,37 @@
             "Haaland936",
             "Jassin",
             "YC"
+        ]
+    },
+    {
+        "name": "Immergut Festival",
+        "date": "2025-05-29 to 2025-05-31",
+        "logo": "images/immergut.png",
+        "ticket-url": "https://infield.live/festivals/immergut-festival/?booking=true",
+        "location": {
+            "name": "Neustrelitz",
+            "latitude": 53.338,
+            "longitude": 13.0484
+        },
+        "bands": [
+            "ÄTNA",
+            "Beharie",
+            "Bilderbuch",
+            "DEHD",
+            "Ditty",
+            "Drangsal",
+            "Erobique",
+            "Fat Dog",
+            "International Music",
+            "mary in the junkyard",
+            "Mel D",
+            "Nilüfer Yanya",
+            "Paula Dalla Corte",
+            "Pom Pom Squad",
+            "Porridge Radio",
+            "Shout Out Louds",
+            "Sophia Kennedy",
+            "strongboi"
         ]
     }
 ]
